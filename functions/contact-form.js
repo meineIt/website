@@ -1,72 +1,56 @@
 // functions/contact-form.js
-const axios = require('axios');
+const sgMail = require('@sendgrid/mail');
 
 exports.handler = async function(event, context) {
-  // Zapewniamy, że metoda to POST
   if (event.httpMethod !== 'POST') {
-    return { 
-      statusCode: 405, 
-      body: JSON.stringify({ error: 'Method Not Allowed' }) 
-    };
+    return { statusCode: 405, body: JSON.stringify({ error: 'Method Not Allowed' }) };
   }
 
   try {
-    // Parsowanie danych z zapytania
     const data = JSON.parse(event.body);
     const { email, phone, company, message, contact_preference } = data;
     
-    // Podstawowa walidacja
     if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
       return {
         statusCode: 400,
-        body: JSON.stringify({ 
-          success: false, 
-          message: 'Nieprawidłowy adres email' 
-        })
+        body: JSON.stringify({ success: false, message: 'Nieprawidłowy adres email' })
       };
     }
 
-    // Weryfikacja tokenu CSRF (jeśli używasz) 
-    const csrfToken = event.headers['x-csrf-token'];
-    // Tu powinno być dodatkowe sprawdzenie tokenu CSRF
-
-    // Token API EmailJS jest przechowywany w zmiennych środowiskowych
-    const EMAILJS_USER_ID = process.env.EMAILJS_USER_ID;
-    const EMAILJS_SERVICE_ID = process.env.EMAILJS_SERVICE_ID;
-    const EMAILJS_TEMPLATE_ID = process.env.EMAILJS_TEMPLATE_ID;
+    // Konfiguracja SendGrid
+    sgMail.setApiKey(process.env.SENDGRID_API_KEY);
     
-    // Zapytanie do EmailJS
-    const response = await axios.post(
-      'https://api.emailjs.com/api/v1.0/email/send',
-      {
-        user_id: EMAILJS_USER_ID,
-        service_id: EMAILJS_SERVICE_ID,
-        template_id: EMAILJS_TEMPLATE_ID,
-        template_params: {
-          email: email,
-          phone: phone || 'Nie podano',
-          company: company || 'Nie podano',
-          message: message || 'Brak wiadomości',
-          contact_preference: contact_preference
-        }
-      },
-      {
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      }
-    );
+    // Przygotowanie wiadomości
+    const msg = {
+      to: 'twoj@email.pl', // adres odbiorcy (Twój adres email)
+      from: 'formularz@hyperautomate.pl', // zweryfikowany nadawca w SendGrid
+      subject: 'Nowa wiadomość z formularza kontaktowego',
+      text: `
+        Email: ${email}
+        Telefon: ${phone || 'Nie podano'}
+        Firma: ${company || 'Nie podano'}
+        Preferowany kontakt: ${contact_preference}
+        Wiadomość: ${message || 'Brak wiadomości'}
+      `,
+      html: `
+        <strong>Nowa wiadomość z formularza kontaktowego</strong><br><br>
+        <b>Email:</b> ${email}<br>
+        <b>Telefon:</b> ${phone || 'Nie podano'}<br>
+        <b>Firma:</b> ${company || 'Nie podano'}<br>
+        <b>Preferowany kontakt:</b> ${contact_preference}<br>
+        <b>Wiadomość:</b> ${message || 'Brak wiadomości'}<br>
+      `
+    };
+    
+    // Wysłanie wiadomości
+    await sgMail.send(msg);
 
     return {
       statusCode: 200,
-      body: JSON.stringify({ 
-        success: true,
-        message: 'Wiadomość została wysłana' 
-      })
+      body: JSON.stringify({ success: true, message: 'Wiadomość została wysłana' })
     };
   } catch (error) {
     console.error('Error:', error);
-    
     return {
       statusCode: 500,
       body: JSON.stringify({ 
