@@ -1,8 +1,0 @@
-{
-  "name": "hyperautomate",
-  "version": "1.0.0",
-  "description": "Hyperautomate website",
-  "dependencies": {
-    "axios": "^1.4.0"
-  }
-}
