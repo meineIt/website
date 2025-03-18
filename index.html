@@ -2104,8 +2104,12 @@ if (contactForm) {
                 // Pobierz token CSRF
                 const csrfToken = document.getElementById('csrfToken').value;
                 
+                // Pokazujemy komunikat o wysyłaniu
+                document.getElementById('contactSuccessMessage').style.display = 'block';
+                document.getElementById('contactSuccessMessage').textContent = "Wysyłanie wiadomości...";
+                
                 // Wywołaj Netlify Function
-                const response = await fetch('/api/contact-form', {
+                const response = await fetch('/.netlify/functions/contact-form', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -2124,7 +2128,7 @@ if (contactForm) {
                 
                 if (result.success) {
                     // Pokaż komunikat o sukcesie
-                    document.getElementById('contactSuccessMessage').style.display = 'block';
+                    document.getElementById('contactSuccessMessage').textContent = "Dziękujemy za wiadomość! Nasz zespół skontaktuje się z Tobą w ciągu 24 godzin.";
                     contactForm.reset();
                     
                     // Ukryj komunikat po czasie
@@ -2138,6 +2142,7 @@ if (contactForm) {
                 }
                 
             } catch (error) {
+                document.getElementById('contactSuccessMessage').style.display = 'none';
                 showToast('Wystąpił błąd. Spróbuj ponownie później.', 'error');
                 console.error('Error:', error);
             }
