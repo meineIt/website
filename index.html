@@ -2061,158 +2061,150 @@
                 });
             }
             
-            // Contact Form with EmailJS
-            const contactForm = document.getElementById('contactForm');
-            
-            if (contactForm) {
-                contactForm.addEventListener('submit', async function(e) {
-                    e.preventDefault();
-                    
-                    // Reset form errors
-                    const formGroups = contactForm.querySelectorAll('.form-group');
-                    formGroups.forEach(group => group.classList.remove('error'));
-                    
-                    // Get form values and sanitize inputs
-                    const email = sanitizeInput(document.getElementById('email').value.trim());
-                    const phone = sanitizeInput(document.getElementById('phone').value.trim());
-                    const company = sanitizeInput(document.getElementById('company').value.trim());
-                    const message = sanitizeInput(document.getElementById('message').value.trim());
-                    
-                    // Get selected contact preference
-                    const contactPreference = document.querySelector('input[name="contact_preference"]:checked').value;
-                    
-                    // Validate form
-                    let isValid = true;
-                    
-                    // Email validation
-                    if (!email || !validateEmail(email)) {
-                        document.getElementById('emailGroup').classList.add('error');
-                        isValid = false;
-                    }
-                    
-                    // Phone validation (if provided)
-                    if (!validatePhone(phone)) {
-                        document.getElementById('phoneGroup').classList.add('error');
-                        isValid = false;
-                    }
-                    
-                    // Check for dangerous content
-                    if (hasDangerousContent(message)) {
-                        document.getElementById('messageGroup').classList.add('error');
-                        isValid = false;
-                    }
-                    
-                    // Submit form if valid
-                    if (isValid) {
-                        try {
-                            // Prepare data for EmailJS
-                            const templateParams = {
-                                email: email,
-                                phone: phone,
-                                company: company,
-                                message: message,
-                                contact_preference: contactPreference
-                            };
-                            
-                            // Send email using EmailJS
-                            // SERVICE_ID i TEMPLATE_ID należy zastąpić swoimi identyfikatorami z EmailJS
-                            const response = await emailjs.send('SERVICE_ID', 'TEMPLATE_ID', templateParams);
-                            
-                            if (response.status === 200) {
-                                // Show success message
-                                document.getElementById('contactSuccessMessage').style.display = 'block';
-                                contactForm.reset();
-                                
-                                // Hide success message after 5 seconds
-                                setTimeout(() => {
-                                    document.getElementById('contactSuccessMessage').style.display = 'none';
-                                }, 5000);
-                                
-                                showToast('Wiadomość została wysłana!');
-                            } else {
-                                throw new Error('Błąd podczas wysyłania formularza');
-                            }
-                        } catch (error) {
-                            showToast('Wystąpił błąd. Spróbuj ponownie później.', 'error');
-                            console.error('Error:', error);
-                        }
-                    }
+// Obsługa formularza kontaktowego
+const contactForm = document.getElementById('contactForm');
+
+if (contactForm) {
+    contactForm.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        
+        // Reset błędów formularza
+        const formGroups = contactForm.querySelectorAll('.form-group');
+        formGroups.forEach(group => group.classList.remove('error'));
+        
+        // Pobierz dane formularza
+        const email = document.getElementById('email').value.trim();
+        const phone = document.getElementById('phone').value.trim();
+        const company = document.getElementById('company').value.trim();
+        const message = document.getElementById('message').value.trim();
+        const contactPreference = document.querySelector('input[name="contact_preference"]:checked').value;
+        
+        // Walidacja
+        let isValid = true;
+        
+        if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+            document.getElementById('emailGroup').classList.add('error');
+            isValid = false;
+        }
+        
+        // Walidacja telefonu (jeśli podany)
+        if (phone && !/^[+]?[(]?[0-9]{3}[)]?[-\s.]?[0-9]{3}[-\s.]?[0-9]{3,6}$/.test(phone)) {
+            document.getElementById('phoneGroup').classList.add('error');
+            isValid = false;
+        }
+        
+        // Walidacja wiadomości pod kątem niebezpiecznej zawartości
+        if (/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi.test(message)) {
+            document.getElementById('messageGroup').classList.add('error');
+            isValid = false;
+        }
+        
+        if (isValid) {
+            try {
+                // Pobierz token CSRF
+                const csrfToken = document.getElementById('csrfToken').value;
+                
+                // Wywołaj Netlify Function
+                const response = await fetch('/api/contact-form', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-Token': csrfToken
+                    },
+                    body: JSON.stringify({
+                        email: email,
+                        phone: phone,
+                        company: company,
+                        message: message,
+                        contact_preference: contactPreference
+                    })
                 });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    // Pokaż komunikat o sukcesie
+                    document.getElementById('contactSuccessMessage').style.display = 'block';
+                    contactForm.reset();
+                    
+                    // Ukryj komunikat po czasie
+                    setTimeout(() => {
+                        document.getElementById('contactSuccessMessage').style.display = 'none';
+                    }, 5000);
+                    
+                    showToast('Wiadomość została wysłana!');
+                } else {
+                    throw new Error(result.message || 'Wystąpił błąd');
+                }
+                
+            } catch (error) {
+                showToast('Wystąpił błąd. Spróbuj ponownie później.', 'error');
+                console.error('Error:', error);
+            }
+        }
+    });
+}
+            
+// Obsługa formularza e-booka
+const ebookForm = document.getElementById('ebookForm');
+
+if (ebookForm) {
+    ebookForm.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        
+        // Reset błędów
+        document.getElementById('ebookEmailGroup').classList.remove('error');
+        
+        // Pobierz adres email
+        const email = document.getElementById('ebookEmail').value.trim();
+        
+        if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+            document.getElementById('ebookEmailGroup').classList.add('error');
+            return;
+        }
+        
+        try {
+            // Wywołaj Netlify Function zamiast bezpośredniego API MailerLite
+            const response = await fetch('/api/subscribe-ebook', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ email: email })
+            });
+            
+            const result = await response.json();
+            
+            if (result.success) {
+                // Pokaż komunikat o sukcesie
+                document.getElementById('ebookSuccessMessage').style.display = 'block';
+                ebookForm.reset();
+                
+                // Jeśli serwer zwrócił link do pobrania, możesz przekierować
+                if (result.downloadUrl) {
+                    setTimeout(() => {
+                        window.location.href = result.downloadUrl;
+                    }, 3000);
+                }
+                
+                // Zamknij popup po czasie
+                setTimeout(() => {
+                    document.getElementById('ebookSuccessMessage').style.display = 'none';
+                    // Funkcja zamykająca popup
+                    closeEbookPopupFn();
+                }, 5000);
+                
+                showToast('E-book został wysłany na Twój adres email!');
+            } else {
+                throw new Error(result.message || 'Wystąpił błąd');
             }
             
-            // E-book Form with MailerLite
-            const ebookForm = document.getElementById('ebookForm');
-            
-            if (ebookForm) {
-                ebookForm.addEventListener('submit', async function(e) {
-                    e.preventDefault();
-                    
-                    // Reset form errors
-                    document.getElementById('ebookEmailGroup').classList.remove('error');
-                    
-                    // Get email and validate
-                    const email = document.getElementById('ebookEmail').value.trim();
-                    
-                    if (!email || !validateEmail(email)) {
-                        document.getElementById('ebookEmailGroup').classList.add('error');
-                        return;
-                    }
-                    
-                    try {
-                        // Tutaj dodajemy kod integracji z MailerLite
-                        // Ponieważ jest to statyczna strona, wykorzystamy serwer zewnętrzny (np. Netlify Functions, Vercel Edge Functions lub podobne)
-                        
-                        // Przykładowa integracja z MailerLite (należy dostosować do rzeczywistej implementacji)
-                        // W rzeczywistości warto to zrobić przez funkcję serverless lub przekierować do formularza MailerLite
-                        const subscribeUrl = 'https://assets.mailerlite.com/jsonp/TWOJ_ID_MAILERLITE/subscribers';
-                        
-                        /*
-                        // To będzie realizowane na serwerze, tutaj tylko zarys logiki
-                        const response = await fetch(subscribeUrl, {
-                            method: 'POST',
-                            headers: {
-                                'Content-Type': 'application/json',
-                                'X-MailerLite-ApiKey': 'YOUR_API_KEY'
-                            },
-                            body: JSON.stringify({
-                                email: email,
-                                groups: ['ID_GRUPY_EBOOKA']
-                            })
-                        });
-                        
-                        if (!response.ok) {
-                            throw new Error('Błąd podczas zapisywania do newslettera');
-                        }
-                        */
-                        
-                        // Symulacja udanej subskrypcji (zastąp faktyczną integracją)
-                        await new Promise(resolve => setTimeout(resolve, 1000));
-                        
-                        // Pokaż informację o sukcesie
-                        document.getElementById('ebookSuccessMessage').style.display = 'block';
-                        ebookForm.reset();
-                        
-                        // Po 3 sekundach przekieruj do pobierania e-booka
-                        setTimeout(() => {
-                            // Tutaj możesz dodać kod przekierowujący do pobierania e-booka
-                            // window.location.href = 'ścieżka/do/ebooka.pdf';
-                            
-                            // Zamknij popup po dodatkowych 2 sekundach
-                            setTimeout(() => {
-                                closeEbookPopupFn();
-                                document.getElementById('ebookSuccessMessage').style.display = 'none';
-                            }, 2000);
-                            
-                        }, 3000);
-                        
-                        showToast('E-book został wysłany na Twój adres email!');
-                        
-                    } catch (error) {
-                        showToast('Wystąpił błąd. Spróbuj ponownie później.', 'error');
-                        console.error('Error:', error);
-                    }
-                });
-            }
+        } catch (error) {
+            showToast('Wystąpił błąd. Spróbuj ponownie później.', 'error');
+            console.error('Error:', error);
+        }
+    });
+}
             
             // Intersection Observer for animation on scroll
             const observerOptions = {
