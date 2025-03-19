@@ -427,13 +427,13 @@
         }
         
         .hero-image {
-            position: relative;
-            width: 100%;
-            aspect-ratio: 16/9;
-            border-radius: var(--radius-lg);
-            overflow: hidden;
-            box-shadow: var(--shadow-lg);
-            background: var(--dark-200);
+			position: relative;
+			width: 100%;
+			aspect-ratio: 16/9;
+			border-radius: var(--radius-lg);
+			overflow: hidden;
+			box-shadow: var(--shadow-lg);
+			background: transparent;
         }
         
         .hero-video-container {
@@ -1521,10 +1521,6 @@
             </div>
             <div class="hero-image fade-in-delay-1">
                 <div class="hero-video-container">
-                    <!-- Tutaj będzie umieszczony iframe z YouTube - przykładowa struktura -->
-                    <div style="display: flex; align-items: center; justify-content: center; width: 100%; height: 100%; color: var(--light); font-size: 1.2rem;">
-                        Film YouTube zostanie tutaj osadzony
-                    </div>
                     <!-- 
                     Kod do osadzenia filmu (zastąp VIDEO_ID identyfikatorem filmu):
                     <iframe 
@@ -1748,7 +1744,7 @@
                 <!-- Dodana przestrzeń na pionową grafikę -->
                 <div class="contact-image fade-in-delay-1">
                     <!-- Miejsce na pionową grafikę - zastąp 'placeholder-image.jpg' właściwym URL grafiki -->
-                    <img src="https://via.placeholder.com/300x500" alt="Automatyzacja dla Twojego biznesu" class="vertical-image">
+                        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="" class="vertical-image">
                 </div>
                 
                 <div class="contact-form fade-in-delay-2">
@@ -2020,6 +2016,27 @@
                 ebookPopup.classList.remove('show');
                 document.body.style.overflow = '';
             }
+            
+            // Funkcja otwierająca popup e-book po określonym czasie
+			function showPopupAfterDelay() {
+			    // Sprawdzenie czy użytkownik już widział popup w tej sesji
+			    if (!sessionStorage.getItem('popupShown')) {
+	        		setTimeout(() => {
+			            // Pokaż popup
+            			const ebookPopup = document.getElementById('ebookPopup');
+			            if (ebookPopup) {
+            			    ebookPopup.classList.add('show');
+			                document.body.style.overflow = 'hidden';
+                
+            			    // Zapisz informację, że popup został już pokazany w tej sesji
+			                sessionStorage.setItem('popupShown', 'true');
+            			}
+		        }, 4000); // 4 sekundy = 4000 milisekund
+    			}
+			}
+
+// Wywołaj funkcję po załadowaniu strony
+showPopupAfterDelay();
             
             // Event listeners dla przycisków e-booka
             if (ebookPopupBtn) {
