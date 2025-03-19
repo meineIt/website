@@ -23,7 +23,7 @@ exports.handler = async function(event, context) {
     // Przygotowanie wiadomości
     const msg = {
       to: 'itmeine@gmail.com', // WAŻNE: Zmień na swój adres email!
-      from: 'formularz@hyperautomate.pl', // Zmień na zweryfikowany adres email w SendGrid
+      from: 'hubertus-1974@o2.pl', // Zmień na zweryfikowany adres email w SendGrid
       subject: 'Nowa wiadomość z formularza kontaktowego - hyperautomate.pl',
       text: `
         Otrzymałeś nową wiadomość z formularza kontaktowego:
