@@ -1,0 +1,2335 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Akademia Skrótów iPhone - Automatyzuj Swoje Życie Cyfrowe</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Clash+Display:wght@400;500;600;700&family=Outfit:wght@300;400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Custom Properties */
+        :root {
+            /* Core Colors - 2025 Trend Palette - Turquoise Theme */
+            --primary: #00C2B8;
+            --primary-dark: #00A39A;
+            --secondary: #4C4EFF;
+            --secondary-dark: #3B3FD1;
+            --accent: #01F0C8;
+            --accent-dark: #04D6B3;
+            
+            /* Neutrals */
+            --light: #F4FFFE;
+            --light-200: #E6F8F6;
+            --light-300: #D6EFED;
+            --dark: #112B29;
+            --dark-200: #1D413F;
+            --dark-300: #2A504D;
+            
+            /* Utility */
+            --success: #00CC99;
+            --info: #53A9FF;
+            --warning: #FFB74A;
+            --error: #FF5252;
+            
+            /* Glass Effects */
+            --glass-bg: rgba(255, 255, 255, 0.06);
+            --glass-bg-dark: rgba(18, 19, 23, 0.65);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --glass-border-dark: rgba(255, 255, 255, 0.05);
+            
+            /* Shadows */
+            --shadow-sm: 0 2px 10px rgba(0, 194, 184, 0.05);
+            --shadow-md: 0 8px 30px rgba(0, 194, 184, 0.08);
+            --shadow-lg: 0 25px 60px rgba(0, 194, 184, 0.1);
+            --shadow-focus: 0 0 0 3px rgba(1, 240, 200, 0.25);
+            
+            /* Gradients */
+            --gradient-primary: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+            --gradient-secondary: linear-gradient(135deg, var(--secondary) 0%, #6C70FF 100%);
+            --gradient-accent: linear-gradient(135deg, var(--accent) 0%, #4DFFE1 100%);
+            --gradient-mixed: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            
+            /* Transitions */
+            --transition-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-normal: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-slow: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            
+            /* Sizing & Spacing */
+            --header-height: 80px;
+            --container-width: 1280px;
+            --radius-sm: 6px;
+            --radius-md: 12px;
+            --radius-lg: 24px;
+            --radius-full: 9999px;
+            
+            /* Z-Index Layers */
+            --z-header: 100;
+            --z-modal: 200;
+            --z-tooltip: 300;
+        }
+        
+        /* Base Reset */
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body, html {
+            width: 100%;
+            min-height: 100vh;
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: 'Outfit', system-ui, sans-serif;
+            color: var(--dark);
+            background-color: var(--light);
+            background-image: 
+                radial-gradient(circle at 90% 10%, rgba(0, 194, 184, 0.08) 0%, transparent 40%),
+                radial-gradient(circle at 10% 90%, rgba(1, 240, 200, 0.1) 0%, transparent 50%);
+            line-height: 1.6;
+            overflow-x: hidden;
+            font-size: 16px;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Clash Display', sans-serif;
+            font-weight: 700;
+            line-height: 1.2;
+            letter-spacing: -0.02em;
+        }
+        
+        h1 {
+            font-size: clamp(2.5rem, 5vw, 4.5rem);
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            background: var(--gradient-mixed);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: -0.03em;
+        }
+        
+        h2 {
+            font-size: clamp(2rem, 4vw, 3rem);
+            color: var(--dark);
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+        
+        h3 {
+            font-size: clamp(1.5rem, 3vw, 2rem);
+            color: var(--dark);
+            margin-bottom: 1rem;
+        }
+        
+        p {
+            margin-bottom: 1.5rem;
+            font-size: clamp(1rem, 1.1vw, 1.125rem);
+            color: var(--dark-300);
+        }
+        
+        a {
+            color: var(--primary);
+            text-decoration: none;
+            transition: color var(--transition-fast);
+        }
+        
+        a:hover {
+            color: var(--primary-dark);
+        }
+        
+        img, svg {
+            max-width: 100%;
+            height: auto;
+        }
+        
+        /* Container */
+        .container {
+            width: 90%;
+            max-width: var(--container-width);
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+        
+        /* Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.875rem 1.75rem;
+            font-weight: 600;
+            font-size: 1rem;
+            border-radius: var(--radius-full);
+            cursor: pointer;
+            transition: all var(--transition-normal);
+            border: none;
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+            gap: 0.5rem;
+        }
+        
+        .btn::after {
+            content: "";
+            position: absolute;
+            width: 0;
+            height: 0;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            transition: width 0.6s ease-out, height 0.6s ease-out;
+        }
+        
+        .btn:hover::after {
+            width: 300%;
+            height: 300%;
+        }
+        
+        .btn-primary {
+            background: var(--gradient-primary);
+            color: white;
+            box-shadow: 0 5px 15px rgba(76, 78, 255, 0.25);
+        }
+        
+        .btn-primary:hover {
+            box-shadow: 0 8px 25px rgba(76, 78, 255, 0.4);
+            transform: translateY(-2px);
+            color: white;
+        }
+        
+        .btn-secondary {
+            background: var(--gradient-secondary);
+            color: white;
+            box-shadow: 0 5px 15px rgba(76, 78, 255, 0.25);
+        }
+        
+        .btn-secondary:hover {
+            box-shadow: 0 8px 25px rgba(76, 78, 255, 0.4);
+            transform: translateY(-2px);
+            color: white;
+        }
+        
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+        }
+        
+        .btn-outline:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-2px);
+        }
+        
+        .btn-light {
+            background: rgba(255, 255, 255, 0.9);
+            color: var(--primary);
+            backdrop-filter: blur(10px);
+        }
+        
+        .btn-light:hover {
+            background: white;
+            box-shadow: var(--shadow-md);
+            transform: translateY(-2px);
+        }
+        
+        /* Nowy przycisk fioletowy z pulsowaniem */
+        .btn-purple {
+            background: var(--gradient-secondary);
+            color: white;
+            box-shadow: 0 5px 15px rgba(76, 78, 255, 0.25);
+            animation: pulse 2s infinite;
+        }
+        
+        .btn-purple:hover {
+            box-shadow: 0 8px 25px rgba(76, 78, 255, 0.4);
+            transform: translateY(-2px);
+            color: white;
+        }
+        
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(76, 78, 255, 0.7);
+            }
+            70% {
+                box-shadow: 0 0 0 15px rgba(76, 78, 255, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(76, 78, 255, 0);
+            }
+        }
+        
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: var(--z-header);
+            padding: 1rem 0;
+            transition: all var(--transition-normal);
+            background: rgba(244, 255, 254, 0.8);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(214, 239, 237, 0.5);
+        }
+        
+        header.scrolled {
+            padding: 0.75rem 0;
+            background: rgba(244, 255, 254, 0.95);
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-family: 'Clash Display', sans-serif;
+            font-size: 1.75rem;
+            font-weight: 600;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .logo span {
+            color: var(--dark);
+        }
+        
+        .nav-menu {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+        
+        .nav-link {
+            color: var(--dark-300);
+            font-weight: 500;
+            position: relative;
+            padding: 0.5rem 0;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gradient-primary);
+            transition: width var(--transition-normal);
+            border-radius: var(--radius-full);
+        }
+        
+        .nav-link:hover {
+            color: var(--primary);
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: white;
+            justify-content: center;
+            align-items: center;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--light-300);
+            z-index: 110;
+        }
+        
+        .hamburger-line {
+            width: 20px;
+            height: 2px;
+            background: var(--dark);
+            position: relative;
+            transition: all var(--transition-fast);
+        }
+        
+        .hamburger-line::before,
+        .hamburger-line::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 2px;
+            background: var(--dark);
+            transition: all var(--transition-fast);
+        }
+        
+        .hamburger-line::before {
+            transform: translateY(-6px);
+        }
+        
+        .hamburger-line::after {
+            transform: translateY(6px);
+        }
+        
+        .hamburger.active .hamburger-line {
+            background: transparent;
+        }
+        
+        .hamburger.active .hamburger-line::before {
+            transform: rotate(45deg);
+        }
+        
+        .hamburger.active .hamburger-line::after {
+            transform: rotate(-45deg);
+        }
+        
+        /* Hero Section */
+        .hero {
+            padding: calc(var(--header-height) + 5rem) 0 6rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+        
+        .hero-text {
+            position: relative;
+            z-index: 5;
+        }
+        
+        .hero-image {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 16/9;
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+            background: transparent;
+        }
+        
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.5rem 1.25rem;
+            background: rgba(0, 194, 184, 0.1);
+            color: var(--primary);
+            border-radius: var(--radius-full);
+            font-weight: 600;
+            font-size: 0.875rem;
+            margin-bottom: 1.5rem;
+            font-family: 'Space Grotesk', sans-serif;
+            letter-spacing: 0.02em;
+        }
+        
+        .highlight {
+            color: var(--primary);
+            font-weight: 600;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .highlight::after {
+            content: "";
+            position: absolute;
+            bottom: 4px;
+            left: 0;
+            width: 100%;
+            height: 6px;
+            background: var(--secondary);
+            opacity: 0.2;
+            border-radius: var(--radius-sm);
+            z-index: -1;
+        }
+        
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+        
+        .floating-shapes {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        .shape {
+            position: absolute;
+            border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+            filter: blur(40px);
+        }
+        
+        .shape-1 {
+            top: 10%;
+            left: -10%;
+            width: 500px;
+            height: 500px;
+            background: var(--accent);
+            opacity: 0.05;
+            animation: float 25s ease-in-out infinite;
+        }
+        
+        .shape-2 {
+            bottom: -10%;
+            right: -10%;
+            width: 600px;
+            height: 600px;
+            background: var(--primary);
+            opacity: 0.05;
+            animation: float 30s ease-in-out infinite reverse;
+        }
+        
+        .shape-3 {
+            top: 50%;
+            right: 20%;
+            width: 300px;
+            height: 300px;
+            background: var(--secondary);
+            opacity: 0.05;
+            animation: float 20s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0% {
+                transform: translate(0, 0) rotate(0deg);
+            }
+            50% {
+                transform: translate(-3%, 3%) rotate(5deg);
+            }
+            100% {
+                transform: translate(0, 0) rotate(0deg);
+            }
+        }
+        
+        /* Stats Bar */
+        .stats-bar {
+            padding: 1.5rem 0;
+            background: white;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-md);
+            margin-top: -3rem;
+            position: relative;
+            z-index: 5;
+        }
+        
+        .stats-container {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+        
+        .stat-item {
+            text-align: center;
+            flex: 1;
+            min-width: 200px;
+        }
+        
+        .stat-number {
+            font-family: 'Space Grotesk', monospace;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+            position: relative;
+            display: inline-block;
+            letter-spacing: -0.02em;
+        }
+        
+        .stat-number::after {
+            content: "+";
+            font-size: 1.5rem;
+            position: absolute;
+            top: 0;
+            right: -15px;
+        }
+        
+        .stat-label {
+            font-size: 1rem;
+            color: var(--dark-300);
+        }
+        
+        /* Features Section */
+        .features {
+            padding: 8rem 0;
+            position: relative;
+        }
+        
+        .section-intro {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 4rem;
+            position: relative;
+        }
+        
+        .section-intro h2::after {
+            content: '';
+            position: absolute;
+            bottom: -0.75rem;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--gradient-primary);
+            border-radius: var(--radius-full);
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5rem;
+        }
+        
+        .feature-card {
+            background: white;
+            border-radius: var(--radius-md);
+            padding: 2.5rem;
+            box-shadow: var(--shadow-md);
+            transition: all var(--transition-normal);
+            border: 1px solid var(--light-200);
+            position: relative;
+            z-index: 5;
+            height: 100%;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--primary);
+        }
+        
+        .feature-icon {
+            height: 70px;
+            width: 70px;
+            background: var(--light-200);
+            border-radius: var(--radius-sm);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            font-size: 2rem;
+            position: relative;
+            transition: all var(--transition-normal);
+        }
+        
+        .feature-card:hover .feature-icon {
+            background: var(--primary);
+            color: white;
+        }
+
+        /* Challenges Section */
+        .challenges {
+            padding: 6rem 0;
+            position: relative;
+            background: var(--light-200);
+            border-radius: var(--radius-lg);
+        }
+        
+        .challenges-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .challenges-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .challenge-item {
+            background: white;
+            border-radius: var(--radius-md);
+            padding: 2rem;
+            box-shadow: var(--shadow-md);
+            transition: all var(--transition-normal);
+            border-left: 4px solid var(--primary);
+        }
+        
+        .challenge-item:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .challenge-item h4 {
+            margin-bottom: 1rem;
+            color: var(--dark);
+            font-weight: 600;
+            font-size: 1.2rem;
+        }
+        
+        .challenge-item p {
+            margin-bottom: 0;
+            color: var(--dark-300);
+        }
+        
+        /* Benefits Section */
+        .benefits {
+            padding: 6rem 0;
+            position: relative;
+        }
+        
+        .benefits-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+        
+        .benefits-image {
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+            position: relative;
+        }
+        
+        .benefits-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        .benefits-list {
+            list-style: none;
+        }
+        
+        .benefit-item {
+            margin-bottom: 1.5rem;
+            padding-left: 2.5rem;
+            position: relative;
+        }
+        
+        .benefit-item::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 28px;
+            height: 28px;
+            background: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+        
+        .benefit-item h4 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+        }
+        
+        .benefit-item p {
+            margin-bottom: 0;
+            color: var(--dark-300);
+        }
+        
+        /* Process Section */
+        .process {
+            padding: 8rem 0;
+            background: var(--light-200);
+            position: relative;
+            border-radius: var(--radius-lg);
+            margin: 2rem 0;
+        }
+        
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+            counter-reset: step-counter;
+        }
+        
+        @media (max-width: 992px) {
+            .steps {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 2rem;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .steps {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .step-item {
+            position: relative;
+            padding: 2.5rem 2rem 2rem;
+            background: white;
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-md);
+            border: 1px solid transparent;
+            transition: all var(--transition-normal);
+            counter-increment: step-counter;
+            height: 100%;
+        }
+        
+        .step-item:hover {
+            border-color: var(--primary);
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .step-item::before {
+            content: counter(step-counter);
+            position: absolute;
+            top: -25px;
+            left: 25px;
+            width: 50px;
+            height: 50px;
+            background: var(--gradient-primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 800;
+            font-size: 1.5rem;
+            box-shadow: 0 4px 15px rgba(76, 78, 255, 0.3);
+        }
+        
+        /* Sample Lessons */
+        .samples {
+            padding: 6rem 0;
+            position: relative;
+        }
+        
+        .samples-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2.5rem;
+            margin-top: 3rem;
+        }
+        
+        .sample-card {
+            background: white;
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+            transition: all var(--transition-normal);
+        }
+        
+        .sample-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .sample-image {
+            width: 100%;
+            height: 200px;
+            background-color: var(--light-300);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .sample-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform var(--transition-normal);
+        }
+        
+        .sample-card:hover .sample-image img {
+            transform: scale(1.05);
+        }
+        
+        .sample-content {
+            padding: 2rem;
+        }
+        
+        .sample-module {
+            font-family: 'Space Grotesk', monospace;
+            color: var(--primary);
+            font-size: 0.875rem;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+        
+        .sample-card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+        }
+        
+        .sample-card p {
+            margin-bottom: 0;
+        }
+        
+        /* Testimonials */
+        .testimonials {
+            padding: 8rem 0;
+            position: relative;
+        }
+        
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2.5rem;
+        }
+        
+        .testimonial-card {
+            background: white;
+            border-radius: var(--radius-md);
+            padding: 2.5rem;
+            box-shadow: var(--shadow-md);
+            border: 1px solid var(--light-200);
+            transition: all var(--transition-normal);
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .testimonial-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .testimonial-rating {
+            display: flex;
+            gap: 0.25rem;
+            margin-bottom: 1.5rem;
+            color: var(--warning);
+        }
+        
+        .testimonial-text {
+            position: relative;
+            padding: 0 0 1.5rem;
+            flex-grow: 1;
+        }
+        
+        .testimonial-text::before {
+            content: open-quote;
+            font-family: serif;
+            font-size: 4rem;
+            color: var(--light-300);
+            position: absolute;
+            top: -1.5rem;
+            left: -1rem;
+            line-height: 1;
+            z-index: 0;
+            opacity: 0.5;
+        }
+        
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            border-top: 1px solid var(--light-300);
+            padding-top: 1.5rem;
+        }
+        
+        .author-avatar {
+            width: 60px;
+            height: 60px;
+            background: var(--light-200);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--dark-300);
+            font-size: 0.8rem;
+            overflow: hidden;
+        }
+        
+        .author-info h4 {
+            margin-bottom: 0.2rem;
+            font-size: 1.1rem;
+        }
+        
+        .author-info p {
+            margin-bottom: 0;
+            color: var(--dark-300);
+            font-size: 0.9rem;
+        }
+        
+        /* Course Comparison */
+        .comparison {
+            padding: 6rem 0;
+            background: var(--light-200);
+            border-radius: var(--radius-lg);
+            position: relative;
+            margin: 2rem 0;
+        }
+        
+        .comparison-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            margin-top: 3rem;
+            overflow: hidden;
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-md);
+        }
+        
+        .comparison-table th,
+        .comparison-table td {
+            padding: 1.25rem;
+            text-align: left;
+            border-bottom: 1px solid var(--light-300);
+        }
+        
+        .comparison-table th {
+            background: var(--primary);
+            color: white;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+        
+        .comparison-table th:first-child {
+            width: 30%;
+        }
+        
+        .comparison-table tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .comparison-table tr td:first-child {
+            font-weight: 600;
+            color: var(--dark);
+        }
+        
+        .comparison-table td {
+            background: white;
+        }
+        
+        .comparison-table .check {
+            color: var(--success);
+            font-size: 1.2rem;
+        }
+        
+        .comparison-table .times {
+            color: var(--error);
+            font-size: 1.2rem;
+        }
+        
+        /* Pricing Section */
+        .pricing {
+            padding: 8rem 0;
+            position: relative;
+        }
+        
+        .pricing-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5rem;
+            margin-top: 3rem;
+        }
+        
+        .pricing-card {
+            background: white;
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+            transition: all var(--transition-normal);
+            border: 1px solid var(--light-300);
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .pricing-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--primary);
+        }
+        
+        .pricing-header {
+            padding: 2.5rem;
+            background: var(--light-200);
+            text-align: center;
+        }
+        
+        .pricing-title {
+            color: var(--dark);
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .pricing-price {
+            color: var(--primary);
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            font-family: 'Space Grotesk', monospace;
+        }
+        
+        .pricing-price .currency {
+            font-size: 1.5rem;
+            vertical-align: super;
+            font-weight: 500;
+        }
+        
+        .pricing-price .period {
+            color: var(--dark-300);
+            font-size: 1rem;
+            font-weight: 400;
+        }
+        
+        .pricing-body {
+            padding: 2.5rem;
+            flex-grow: 1;
+        }
+        
+        .pricing-features {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+        
+        .pricing-feature {
+            margin-bottom: 1rem;
+            padding-left: 2rem;
+            position: relative;
+        }
+        
+        .pricing-feature::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--primary);
+            font-weight: bold;
+        }
+        
+        .pricing-footer {
+            padding: 0 2.5rem 2.5rem;
+        }
+        
+        .pricing-button {
+            width: 100%;
+        }
+        
+        .pricing-card.featured {
+            border: 2px solid var(--primary);
+            transform: scale(1.05);
+        }
+        
+        .pricing-card.featured .pricing-header {
+            background: var(--gradient-primary);
+            color: white;
+        }
+        
+        .pricing-card.featured .pricing-title,
+        .pricing-card.featured .pricing-price {
+            color: white;
+        }
+        
+        .pricing-card.featured .pricing-price .period {
+            color: rgba(255, 255, 255, 0.8);
+        }
+        
+        .pricing-card.featured:hover {
+            transform: scale(1.05) translateY(-10px);
+        }
+        
+        /* FAQ Section */
+        .faq {
+            padding: 6rem 0;
+            position: relative;
+        }
+        
+        .faq-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .accordion {
+            margin-top: 3rem;
+        }
+        
+        .accordion-item {
+            background: white;
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-md);
+            margin-bottom: 1.5rem;
+            overflow: hidden;
+        }
+        
+        .accordion-header {
+            padding: 1.5rem 2rem;
+            cursor: pointer;
+            position: relative;
+            user-select: none;
+        }
+        
+        .accordion-header::after {
+            content: "+";
+            position: absolute;
+            right: 2rem;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.5rem;
+            transition: all var(--transition-fast);
+        }
+        
+        .accordion-item.active .accordion-header::after {
+            content: "-";
+        }
+        
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height var(--transition-normal);
+        }
+        
+        .accordion-item.active .accordion-content {
+            max-height: 500px;
+        }
+        
+        .accordion-body {
+            padding: 0 2rem 2rem;
+        }
+        
+        /* CTA Section */
+        .cta {
+            padding: 8rem 0;
+            background: var(--gradient-primary);
+            color: white;
+            text-align: center;
+            border-radius: var(--radius-lg);
+            position: relative;
+            overflow: hidden;
+            margin: 4rem 0;
+        }
+        
+        .cta::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: radial-gradient(circle at 20% 50%, rgba(255, 255, 255, 0.1) 0%, transparent 20%),
+                            radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.1) 0%, transparent 20%);
+        }
+        
+        .cta h2 {
+            color: white;
+            margin-bottom: 1.5rem;
+        }
+        
+        .cta h2::after {
+            background: white;
+        }
+        
+        .cta p {
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 2.5rem;
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 6rem 0 2rem;
+            border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+            position: relative;
+            margin-top: 4rem;
+        }
+        
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 4rem;
+        }
+        
+        .footer-brand p {
+            color: rgba(255, 255, 255, 0.7);
+            margin-top: 1.5rem;
+        }
+        
+        .footer-heading {
+            color: white;
+            margin-bottom: 1.5rem;
+            font-size: 1.2rem;
+            position: relative;
+            padding-bottom: 0.75rem;
+        }
+        
+        .footer-heading::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 3px;
+            background: var(--primary);
+            border-radius: var(--radius-full);
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 1rem;
+        }
+        
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.7);
+            transition: all var(--transition-fast);
+            display: inline-block;
+        }
+        
+        .footer-links a:hover {
+            color: white;
+            transform: translateX(5px);
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+        
+        .social-link {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            transition: all var(--transition-normal);
+            font-size: 1.2rem;
+        }
+        
+        .social-link:hover {
+            background: var(--primary);
+            transform: translateY(-5px);
+            color: white;
+        }
+        
+        .footer-bottom {
+            margin-top: 4rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.9rem;
+        }
+        
+        /* Back to Top Button */
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 50px;
+            height: 50px;
+            background: white;
+            border-radius: 50%;
+            box-shadow: var(--shadow-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            font-size: 1.2rem;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: all var(--transition-normal);
+            z-index: 90;
+            border: 1px solid var(--light-300);
+        }
+        
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .back-to-top:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        /* Countdown Timer */
+        .countdown {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .countdown-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-width: 70px;
+        }
+        
+        .countdown-value {
+            background: white;
+            width: 70px;
+            height: 70px;
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary);
+            box-shadow: var(--shadow-md);
+            font-family: 'Space Grotesk', monospace;
+        }
+        
+        .countdown-label {
+            margin-top: 0.5rem;
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.9);
+            text-transform: uppercase;
+            font-weight: 500;
+        }
+
+        /* Dodane sekcje na grafiki */
+        .graphics-section {
+            padding: 4rem 0;
+            position: relative;
+        }
+        
+        .graphics-container {
+            width: 100%;
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .feature-graphic {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 1200px) {
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 3rem 5rem;
+            }
+        }
+        
+        @media (max-width: 992px) {
+            :root {
+                --header-height: 70px;
+            }
+            
+            h1 {
+                font-size: clamp(2.2rem, 4vw, 3.5rem);
+            }
+            
+            h2 {
+                font-size: clamp(1.8rem, 3vw, 2.5rem);
+            }
+            
+            .hero-content, .benefits-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero-image {
+                order: -1;
+                width: 100%;
+                aspect-ratio: 16/9;
+            }
+            
+            .benefits-image {
+                order: -1;
+            }
+            
+            .pricing-card.featured {
+                transform: scale(1);
+            }
+            
+            .pricing-card.featured:hover {
+                transform: translateY(-10px);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            :root {
+                --header-height: 60px;
+            }
+            
+            header {
+                padding: 0.75rem 0;
+            }
+            
+            .hamburger {
+                display: flex;
+            }
+            
+            .nav-menu {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 75%;
+                height: 100vh;
+                flex-direction: column;
+                justify-content: center;
+                gap: 2rem;
+                background: white;
+                box-shadow: var(--shadow-lg);
+                transition: right var(--transition-normal);
+                z-index: 100;
+            }
+            
+            .nav-menu.active {
+                right: 0;
+            }
+            
+            .nav-link {
+                font-size: 1.2rem;
+                width: 100%;
+                text-align: center;
+                padding: 1rem;
+            }
+            
+            .section-intro {
+                margin-bottom: 3rem;
+            }
+            
+            .cta {
+                padding: 4rem 0;
+            }
+            
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+            
+            .social-links {
+                justify-content: center;
+            }
+            
+            .footer-heading {
+                text-align: center;
+            }
+            
+            .footer-heading::after {
+                left: 50%;
+                transform: translateX(-50%);
+            }
+            
+            .footer-links {
+                text-align: center;
+            }
+            
+            .footer-links a:hover {
+                transform: none;
+            }
+            
+            .footer-brand {
+                text-align: center;
+            }
+            
+            .logo {
+                justify-content: center;
+            }
+            
+            .comparison-table {
+                display: block;
+                overflow-x: auto;
+                white-space: nowrap;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .hero-buttons,
+            .cta-buttons {
+                flex-direction: column;
+                width: 100%;
+            }
+            
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .stats-container {
+                flex-direction: column;
+            }
+            
+            .stat-item {
+                width: 100%;
+            }
+            
+            .countdown {
+                flex-wrap: wrap;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Floating Shapes Background -->
+    <div class="floating-shapes">
+        <div class="shape shape-1"></div>
+        <div class="shape shape-2"></div>
+        <div class="shape shape-3"></div>
+    </div>
+
+    <!-- Header -->
+    <header id="header">
+        <div class="container header-container">
+            <a href="#" class="logo">Akademia<span>Skrótów</span></a>
+            <nav>
+                <ul class="nav-menu">
+                    <li><a href="#benefits" class="nav-link">Korzyści</a></li>
+                    <li><a href="#features" class="nav-link">Dla kogo</a></li>
+                    <li><a href="#process" class="nav-link">Jak to działa</a></li>
+                    <li><a href="#pricing" class="nav-link">Oferta</a></li>
+                    <li><a href="#faq" class="nav-link">FAQ</a></li>
+                </ul>
+            </nav>
+            <div class="hamburger">
+                <div class="hamburger-line"></div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <div class="hero-badge">🚀 Nowy Kurs 2025</div>
+                    <h1>Sprawdzona Formuła Automatyzacji Twojego iPhone'a Ze Skrótami</h1>
+                    <p>Odzyskaj <span class="highlight">setki godzin rocznie</span> dzięki automatyzacjom, które wykonasz bez znajomości programowania. Stwórz własny system, który działa za Ciebie 24/7 — z dowolnego miejsca na świecie.</p>
+                    <div class="hero-buttons">
+                        <a href="#pricing" class="btn btn-purple">Odbierz swój dostęp</a>
+                    </div>
+                </div>
+                <div class="hero-image">
+                    <iframe width="100%" height="100%" src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="iPhone Shortcuts Automation" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Bar -->
+    <div class="container">
+        <div class="stats-bar">
+            <div class="stats-container">
+                <div class="stat-item">
+                    <div class="stat-number">2500</div>
+                    <div class="stat-label">Zadowolonych uczestników</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">150</div>
+                    <div class="stat-label">Automatyzacji w kursie</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">95</div>
+                    <div class="stat-label">% oszczędności czasu</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Challenges Section -->
+    <section class="challenges" id="challenges">
+        <div class="container">
+            <div class="section-intro">
+                <h2>Czy Mierzysz Się z Którymś z Tych Wyzwań?</h2>
+                <p>Większość użytkowników iPhone'a nie zdaje sobie sprawy z potencjału, jaki drzemie w ich urządzeniu. Oto problemy, które rozwiązuje nasz kurs.</p>
+            </div>
+            <div class="challenges-list">
+                <div class="challenge-item">
+                    <h4>Codzienne zadania pochłaniają zbyt wiele czasu</h4>
+                    <p>Powtarzalne czynności na telefonie zajmują Ci mnóstwo czasu, którego nie możesz poświęcić na ważniejsze sprawy.</p>
+                </div>
+                <div class="challenge-item">
+                    <h4>Trudności z organizacją i produktywnością</h4>
+                    <p>Czujesz, że coś umyka Twojej uwadze i brakuje Ci efektywnego systemu zarządzania zadaniami.</p>
+                </div>
+                <div class="challenge-item">
+                    <h4>Zbyt skomplikowane aplikacje do automatyzacji</h4>
+                    <p>Próbowałeś już różnych rozwiązań, ale wydają się zbyt techniczne i trudne w obsłudze.</p>
+                </div>
+                <div class="challenge-item">
+                    <h4>Brak wiedzy, jak wykorzystać pełny potencjał iPhone'a</h4>
+                    <p>Wiesz, że Twój telefon potrafi więcej, ale nie wiesz jak w pełni wykorzystać jego możliwości.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Dodana sekcja grafiki 1 -->
+    <section class="graphics-section">
+        <div class="container">
+            <div class="graphics-container">
+                <img src="/api/placeholder/1200/600" alt="Feature Graphic 1" class="feature-graphic">
+            </div>
+        </div>
+    </section>
+
+    <!-- Benefits Section -->
+    <section class="benefits" id="benefits">
+        <div class="container">
+            <div class="section-intro">
+                <h2>Wyobraź Sobie Jak Byłoby Mieć:</h2>
+                <p>Automatyzacja z aplikacją Skróty to nie tylko oszczędność czasu - to całkowita zmiana sposobu korzystania z Twojego iPhone'a.</p>
+            </div>
+            <div class="benefits-content">
+                <div class="benefits-text">
+                    <ul class="benefits-list">
+                        <li class="benefit-item">
+                            <h4>System, który pracuje za Ciebie 24/7</h4>
+                            <p>Twoje urządzenie wykonuje zadania automatycznie, nawet gdy Ty odpoczywasz lub śpisz.</p>
+                        </li>
+                        <li class="benefit-item">
+                            <h4>Oszczędność ponad 5 godzin tygodniowo</h4>
+                            <p>Zamiast wykonywać powtarzalne czynności, poświęć ten czas na rozwój, odpoczynek lub bliskich.</p>
+                        </li>
+                        <li class="benefit-item">
+                            <h4>Perfekcyjną organizację bez wysiłku</h4>
+                            <p>Twój telefon sam segreguje informacje, przypomina o ważnych sprawach i dba o Twoją produktywność.</p>
+                        </li>
+                        <li class="benefit-item">
+                            <h4>Spokój umysłu dzięki niezawodnemu systemowi</h4>
+                            <p>Przestań martwić się o zapomniane zadania - Twój iPhone zadba o wszystko.</p>
+                        </li>
+                        <li class="benefit-item">
+                            <h4>Umiejętności na lata</h4>
+                            <p>Twoja wiedza o automatyzacji będzie przydatna niezależnie od rozwoju technologii Apple.</p>
+                        </li>
+                    </ul>
+                </div>
+                <div class="benefits-image">
+                    <img src="/api/placeholder/600/800" alt="iPhone Shortcuts Benefits" />
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="container">
+            <div class="section-intro">
+                <h2>Dlaczego Automatyzacja ze Skrótami to Najlepszy Wybór w 2025 Roku?</h2>
+                <p>Aplikacja Skróty na iPhone to potężne narzędzie, które zmieni sposób korzystania z Twojego urządzenia. Oto dlaczego warto to opanować:</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h3>Wykonuj zadania jednym kliknięciem</h3>
+                    <p>Skomplikowane sekwencje działań zamień w jedno dotknięcie ekranu. Oszczędzaj czas i energię na każdym kroku.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔄</div>
+                    <h3>Automatyzacja bez programowania</h3>
+                    <p>Nie potrzebujesz żadnych umiejętności kodowania. Nasz kurs pokazuje, jak tworzyć zaawansowane automatyzacje metodą "przeciągnij i upuść".</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🧩</div>
+                    <h3>Integracja z każdą aplikacją</h3>
+                    <p>Połącz ze sobą aplikacje, które normalnie nie współpracują. Stwórz własny ekosystem dopasowany do Twoich potrzeb.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🎯</div>
+                    <h3>Personalizacja pod Twoje potrzeby</h3>
+                    <p>Twórz rozwiązania dopasowane dokładnie do Twojego stylu pracy i życia. Każdy Skrót można dostosować do indywidualnych preferencji.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔒</div>
+                    <h3>Bezpieczeństwo i prywatność</h3>
+                    <p>Wszystko dzieje się lokalnie na Twoim urządzeniu. Żadne dane nie są wysyłane na zewnętrzne serwery bez Twojej wiedzy.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">⏱️</div>
+                    <h3>Automatyzacje czasowe i lokalizacyjne</h3>
+                    <p>Twój iPhone sam wykona zadania o określonej godzinie lub gdy znajdziesz się w konkretnym miejscu. Technologia, która działa za Ciebie.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Process Section -->
+    <section class="process" id="process">
+        <div class="container">
+            <div class="section-intro">
+                <h2>Kompleksowy System 10 Kroków Do Efektywnej Automatyzacji</h2>
+                <p>W naszym kursie przeprowadzimy Cię przez sprawdzony proces, który pozwoli Ci opanować sztukę automatyzacji na iPhone w rekordowym czasie.</p>
+            </div>
+            <div class="steps">
+                <div class="step-item">
+                    <h3>Podstawy Skrótów</h3>
+                    <p>Poznaj interfejs aplikacji i zasady tworzenia automatyzacji. Zrozumiesz logikę działania bez potrzeby programowania.</p>
+                </div>
+                <div class="step-item">
+                    <h3>Automatyzacja komunikacji</h3>
+                    <p>Naucz się tworzyć szablony wiadomości, automatycznie odpowiadać i zarządzać kontaktami w sposób, który oszczędzi Ci godziny tygodniowo.</p>
+                </div>
+                <div class="step-item">
+                    <h3>Zarządzanie notatkami i zadaniami</h3>
+                    <p>Stwórz system, który automatycznie organizuje Twoje notatki, przypomnienia i zadania do wykonania bez Twojego udziału.</p>
+                </div>
+                <div class="step-item">
+                    <h3>Automatyzacja mediów społecznościowych</h3>
+                    <p>Dowiedz się, jak zarządzać swoją obecnością online za pomocą prostych automatyzacji, które zaoszczędzą Ci godziny pracy.</p>
+                </div>
+                <div class="step-item">
+                    <h3>Automatyzacja zdrowia i fitness</h3>
+                    <p>Stwórz system, który pomoże Ci śledzić i analizować Twoją aktywność fizyczną oraz przypominać o zdrowych nawykach.</p>
+                </div>
+                <div class="step-item">
+                    <h3>Integracja z inteligentnym domem</h3>
+                    <p>Połącz iPhone z urządzeniami smart home, by stworzyć w pełni zautomatyzowane środowisko dostosowane do Twoich potrzeb.</p>
+                </div>
+                <div class="step-item">
+                    <h3>Automatyzacja pracy i produktywności</h3>
+                    <p>Zrewolucjonizuj swój workflow dzięki automatyzacjom, które wykonają za Ciebie rutynowe zadania zawodowe.</p>
+                </div>
+                <div class="step-item">
+                    <h3>Zaawansowane automatyzacje</h3>
+                    <p>Poznaj zaawansowane techniki łączenia różnych aplikacji i usług w złożone, ale łatwe w obsłudze przepływy pracy.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sample Lessons -->
+    <section class="samples" id="samples">
+        <div class="container">
+            <div class="section-intro">
+                <h2>Przykładowe lekcje</h2>
+                <p>Akademia Skrótów to łącznie ponad 60+ lekcji, które trwają więcej niż 12 godzin. To, czego się nauczysz, od razu możesz wdrożyć w życie.</p>
+            </div>
+            <div class="samples-grid">
+                <div class="sample-card">
+                    <div class="sample-image">
+                        <img src="/api/placeholder/400/200" alt="Moduł 1: Podstawy Skrótów">
+                    </div>
+                    <div class="sample-content">
+                        <div class="sample-module">MODUŁ 1: PODSTAWY SKRÓTÓW</div>
+                        <h3>Lekcja 3: Interfejs aplikacji Skróty</h3>
+                        <p>Poznaj dokładnie interfejs aplikacji i zrozum, jak efektywnie poruszać się po jej możliwościach. Przyspieszy to Twoją pracę z automatyzacjami.</p>
+                    </div>
+                </div>
+                <div class="sample-card">
+                    <div class="sample-image">
+                        <img src="/api/placeholder/400/200" alt="Moduł 3: Automatyzacja komunikacji">
+                    </div>
+                    <div class="sample-content">
+                        <div class="sample-module">MODUŁ 3: AUTOMATYZACJA KOMUNIKACJI</div>
+                        <h3>Lekcja 4: Szablony wiadomości i automatyczne odpowiedzi</h3>
+                        <p>Stwórz system automatycznych odpowiedzi i spersonalizowanych szablonów, które zaoszczędzą Ci godziny pisania podobnych treści.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials" id="testimonials">
+        <div class="container">
+            <div class="section-intro">
+                <h2>Co mówią nasi absolwenci</h2>
+                <p>Setki osób zmieniło już sposób korzystania ze swojego iPhone'a dzięki naszemu kursowi. Oto ich historie.</p>
+            </div>
+            <div class="testimonial-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-rating">
+                        ★★★★★
+                    </div>
+                    <div class="testimonial-text">
+                        <p>Dzięki automatyzacjom z kursu oszczędzam około 7 godzin tygodniowo! Moje powiadomienia są teraz uporządkowane, mam automatyczne raporty zdrowia i nie muszę ręcznie wykonywać powtarzalnych zadań. Najlepsza inwestycja w produktywność.</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">
+                            <img src="/api/placeholder/60/60" alt="Marek K.">
+                        </div>
+                        <div class="author-info">
+                            <h4>Marek K.</h4>
+                            <p>Manager, Warszawa</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-rating">
+                        ★★★★★
+                    </div>
+                    <div class="testimonial-text">
+                        <p>Byłam sceptyczna, czy aplikacja Skróty naprawdę może zmienić sposób korzystania z telefonu. Po miesiącu od kursu nie wyobrażam sobie życia bez moich automatyzacji! Wszystko działa jak w zegarku, a ja mam więcej czasu dla rodziny.</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">
+                            <img src="/api/placeholder/60/60" alt="Anna W.">
+                        </div>
+                        <div class="author-info">
+                            <h4>Anna W.</h4>
+                            <p>Przedsiębiorczyni, Kraków</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-rating">
+                        ★★★★★
+                    </div>
+                    <div class="testimonial-text">
+                        <p>Jako fotograf, potrzebowałem systemu, który pomoże mi w zarządzaniu zdjęciami, klientami i terminami. Dzięki kursowi stworzyłem cały ekosystem automatyzacji, który działa za mnie. Polecam każdemu, kto ceni swój czas!</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">
+                            <img src="/api/placeholder/60/60" alt="Tomasz P.">
+                        </div>
+                        <div class="author-info">
+                            <h4>Tomasz P.</h4>
+                            <p>Fotograf, Wrocław</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Dodana sekcja grafiki 2 -->
+    <section class="graphics-section">
+        <div class="container">
+            <div class="graphics-container">
+                <img src="/api/placeholder/1200/600" alt="Feature Graphic 2" class="feature-graphic">
+            </div>
+        </div>
+    </section>
+
+    <!-- Course Comparison -->
+    <section class="comparison" id="comparison">
+        <div class="container">
+            <div class="section-intro">
+                <h2>Dlaczego Akademia Skrótów jest 10x lepsza?</h2>
+                <p>Porównanie z innymi dostępnymi rozwiązaniami pokazuje, dlaczego warto wybrać właśnie nasz kurs.</p>
+            </div>
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Porównanie</th>
+                        <th>Typowe kursy online</th>
+                        <th>Akademia Skrótów</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Prowadzący</td>
+                        <td>Teoretycy bez praktycznego doświadczenia</td>
+                        <td>Ekspert z 5+ lat doświadczenia w automatyzacji iOS</td>
+                    </tr>
+                    <tr>
+                        <td>Format kursu</td>
+                        <td>Ogólnikowe wskazówki bez kontekstu</td>
+                        <td>Proces krok po kroku z gotowymi szablonami do wdrożenia</td>
+                    </tr>
+                    <tr>
+                        <td>Wsparcie</td>
+                        <td>Brak realnego wsparcia</td>
+                        <td>Indywidualna pomoc eksperta</td>
+                    </tr>
+                    <tr>
+                        <td>Praktyczne zastosowanie</td>
+                        <td>Podstawowe przykłady bez realnej wartości</td>
+                        <td>Gotowe do wdrożenia automatyzacje dla każdej sfery życia</td>
+                    </tr>
+                    <tr>
+                        <td>Aktualizacje</td>
+                        <td>Brak lub rzadkie</td>
+                        <td>Regularne aktualizacje zgodne z nowymi wersjami iOS</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- Bonuses Section -->
+    <section class="features" id="bonuses">
+        <div class="container">
+            <div class="section-intro">
+                <h2>To nie tylko kurs. Otrzymasz dużo więcej:</h2>
+                <p>Przygotowaliśmy dodatkowe materiały i bonusy, które znacząco zwiększą wartość kursu.</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">📋</div>
+                    <h3>Biblioteka 150+ gotowych automatyzacji</h3>
+                    <p>Otrzymasz dostęp do obszernej biblioteki gotowych Skrótów, które możesz od razu zaimportować i dostosować do swoich potrzeb.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🧪</div>
+                    <h3>Dostęp do testowych wersji Skrótów</h3>
+                    <p>Jako uczestnik kursu, będziesz miał dostęp do najnowszych automatyzacji jeszcze przed ich oficjalnym udostępnieniem.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🚀</div>
+                    <h3>Bonus: Kurs Produktywności na iOS</h3>
+                    <p>Otrzymasz dodatkowy kurs, który pomoże Ci wykorzystać pełen potencjał swojego iPhone'a poza samą aplikacją Skróty.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔍</div>
+                    <h3>Analiza Twoich automatyzacji przez eksperta</h3>
+                    <p>Nasi eksperci zrecenzują Twoje własne Skróty i zaproponują optymalizacje, które uczynią je jeszcze wydajniejszymi.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section class="pricing" id="pricing">
+        <div class="container">
+            <div class="section-intro">
+                <h2>Wybierz Swoją Ścieżkę Do Efektywnej Automatyzacji</h2>
+                <p>Oferujemy dwa pakiety, które pomogą Ci opanować sztukę automatyzacji na Twoim iPhone.</p>
+            </div>
+            <div class="pricing-container">
+                <div class="pricing-card">
+                    <div class="pricing-header">
+                        <h3 class="pricing-title">Kurs Podstawowy</h3>
+                        <div class="pricing-price">
+                            <span class="currency">zł</span>997
+                            <span class="period">jednorazowo</span>
+                        </div>
+                        <p>Idealny start dla osób, które chcą poznać podstawy automatyzacji.</p>
+                    </div>
+                    <div class="pricing-body">
+                        <ul class="pricing-features">
+                            <li class="pricing-feature">Pełen dostęp do kursu (60+ lekcji)</li>
+                            <li class="pricing-feature">Biblioteka 50 gotowych automatyzacji</li>
+                            <li class="pricing-feature">Dożywotni dostęp do materiałów</li>
+                            <li class="pricing-feature">Certyfikat ukończenia kursu</li>
+                            <li class="pricing-feature">Dostęp do aktualizacji przez 1 rok</li>
+                        </ul>
+                    </div>
+                    <div class="pricing-footer">
+                        <a href="#" class="btn btn-purple pricing-button">Odbierz swój dostęp</a>
+                    </div>
+                </div>
+                <div class="pricing-card featured">
+                    <div class="pricing-header">
+                        <h3 class="pricing-title">Pakiet Premium</h3>
+                        <div class="pricing-price">
+                            <span class="currency">zł</span>1997
+                            <span class="period">jednorazowo</span>
+                        </div>
+                        <p>Kompleksowe rozwiązanie dla osób, które chcą maksymalnie wykorzystać potencjał swojego iPhone'a.</p>
+                    </div>
+                    <div class="pricing-body">
+                        <ul class="pricing-features">
+                            <li class="pricing-feature">Wszystko z pakietu podstawowego</li>
+                            <li class="pricing-feature">Pełna biblioteka 150+ automatyzacji</li>
+                            <li class="pricing-feature">Indywidualna sesja konsultacyjna</li>
+                            <li class="pricing-feature">Bonus: Kurs Produktywności na iOS</li>
+                            <li class="pricing-feature">Dożywotnie aktualizacje</li>
+                        </ul>
+                    </div>
+                    <div class="pricing-footer">
+                        <a href="#" class="btn btn-purple pricing-button">Odbierz swój dostęp</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq" id="faq">
+        <div class="container">
+            <div class="section-intro">
+                <h2>Najczęściej zadawane pytania</h2>
+                <p>Poniżej znajdziesz odpowiedzi na najczęściej zadawane pytania dotyczące kursu.</p>
+            </div>
+            <div class="faq-container">
+                <div class="accordion">
+                    <div class="accordion-item active">
+                        <div class="accordion-header">
+                            <h3>Nie mam wiedzy technicznej. Czy sobie poradzę?</h3>
+                        </div>
+                        <div class="accordion-content">
+                            <div class="accordion-body">
+                                <p>Absolutnie tak! Nasz kurs jest zaprojektowany dla osób na każdym poziomie zaawansowania. Zaczynamy od absolutnych podstaw i krok po kroku wprowadzamy Cię w świat automatyzacji. Nie potrzebujesz żadnych umiejętności programowania ani specjalistycznej wiedzy technicznej.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <div class="accordion-header">
+                            <h3>Jakie urządzenia są wspierane przez kurs?</h3>
+                        </div>
+                        <div class="accordion-content">
+                            <div class="accordion-body">
+                                <p>Kurs jest przeznaczony dla użytkowników iPhone'ów i iPadów z systemem iOS 13 lub nowszym. Większość automatyzacji działa również na Apple Watch oraz MacOS (poprzez synchronizację z iCloud). Wszystkie przedstawione techniki są kompatybilne z najnowszymi wersjami iOS, włącznie z iOS 18.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <div class="accordion-header">
+                            <h3>Czy kurs będzie aktualizowany wraz z nowymi wersjami iOS?</h3>
+                        </div>
+                        <div class="accordion-content">
+                            <div class="accordion-body">
+                                <p>Tak! Regularnie aktualizujemy materiały, aby były zgodne z najnowszymi funkcjami iOS. Wszyscy uczestnicy kursu otrzymują dostęp do aktualizacji przez co najmniej 12 miesięcy (pakiet podstawowy) lub dożywotnio (pakiet premium).</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <div class="accordion-header">
+                            <h3>Ile czasu zajmie mi przejście przez cały kurs?</h3>
+                        </div>
+                        <div class="accordion-content">
+                            <div class="accordion-body">
+                                <p>Kurs składa się z ponad 12 godzin materiałów wideo, które możesz przerabiać we własnym tempie. Większość uczestników widzi pierwsze efekty już po kilku godzinach nauki. Pełne przejście przez kurs i wdrożenie wszystkich automatyzacji zajmuje zwykle 2-4 tygodnie, w zależności od ilości czasu, jaką możesz poświęcić.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <div class="accordion-header">
+                            <h3>Czy będę miał dostęp do kursu na zawsze?</h3>
+                        </div>
+                        <div class="accordion-content">
+                            <div class="accordion-body">
+                                <p>Tak, raz zakupiony kurs jest Twój na zawsze. Nigdy nie utraciasz dostępu do materiałów, które już są w kursie. Jedyną różnicą między pakietami jest okres, przez który otrzymujesz nowe aktualizacje i materiały.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta">
+        <div class="container">
+            <h2>Odzyskaj kontrolę nad swoim czasem już dziś</h2>
+            <p>Dołącz do tysięcy zadowolonych użytkowników, którzy dzięki automatyzacji zaoszczędzili setki godzin i zrewolucjonizowali sposób korzystania ze swoich urządzeń.</p>
+            
+            <div class="countdown">
+                <div class="countdown-item">
+                    <div class="countdown-value" id="days">10</div>
+                    <div class="countdown-label">Dni</div>
+                </div>
+                <div class="countdown-item">
+                    <div class="countdown-value" id="hours">12</div>
+                    <div class="countdown-label">Godziny</div>
+                </div>
+                <div class="countdown-item">
+                    <div class="countdown-value" id="minutes">45</div>
+                    <div class="countdown-label">Minuty</div>
+                </div>
+                <div class="countdown-item">
+                    <div class="countdown-value" id="seconds">33</div>
+                    <div class="countdown-label">Sekundy</div>
+                </div>
+            </div>
+            
+            <div class="cta-buttons">
+                <a href="#pricing" class="btn btn-purple">Odbierz swój dostęp</a>
+                <a href="#faq" class="btn btn-outline">Mam pytania</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="#" class="logo">Akademia<span>Skrótów</span></a>
+                    <p>Rewolucjonizujemy sposób, w jaki korzystasz ze swojego iPhone'a dzięki zaawansowanym automatyzacjom, które oszczędzają Twój czas i zwiększają produktywność.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link">
+                            <i>f</i>
+                        </a>
+                        <a href="#" class="social-link">
+                            <i>in</i>
+                        </a>
+                        <a href="#" class="social-link">
+                            <i>ig</i>
+                        </a>
+                        <a href="#" class="social-link">
+                            <i>yt</i>
+                        </a>
+                    </div>
+                </div>
+                <div class="footer-links-container">
+                    <h4 class="footer-heading">Przydatne linki</h4>
+                    <ul class="footer-links">
+                        <li><a href="#features">Dla kogo</a></li>
+                        <li><a href="#process">Jak to działa</a></li>
+                        <li><a href="#pricing">Cennik</a></li>
+                        <li><a href="#faq">FAQ</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links-container">
+                    <h4 class="footer-heading">Informacje</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">O nas</a></li>
+                        <li><a href="#">Polityka prywatności</a></li>
+                        <li><a href="#">Regulamin</a></li>
+                        <li><a href="#">Kontakt</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links-container">
+                    <h4 class="footer-heading">Kontakt</h4>
+                    <ul class="footer-links">
+                        <li><a href="mailto:kontakt@akademiaskrotow.pl">kontakt@akademiaskrotow.pl</a></li>
+                        <li><a href="tel:+48500400300">+48 500 400 300</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Akademia Skrótów. Wszystkie prawa zastrzeżone.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <div class="back-to-top">
+        <i>↑</i>
+    </div>
+
+    <!-- Scripts -->
+    <script>
+        // Header scroll effect
+        window.addEventListener('scroll', function() {
+            const header = document.getElementById('header');
+            const scrollPosition = window.scrollY;
+            
+            if (scrollPosition > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+        
+        // Mobile menu toggle
+        const hamburger = document.querySelector('.hamburger');
+        const navMenu = document.querySelector('.nav-menu');
+        
+        hamburger.addEventListener('click', function() {
+            this.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
+        
+        // Close mobile menu when clicking a link
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                navMenu.classList.remove('active');
+            });
+        });
+        
+        // Back to top button
+        const backToTopButton = document.querySelector('.back-to-top');
+        
+        window.addEventListener('scroll', function() {
+            if (window.scrollY > 300) {
+                backToTopButton.classList.add('visible');
+            } else {
+                backToTopButton.classList.remove('visible');
+            }
+        });
+        
+        backToTopButton.addEventListener('click', function() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+        
+        // FAQ accordion
+        const accordionItems = document.querySelectorAll('.accordion-item');
+        
+        accordionItems.forEach(item => {
+            const header = item.querySelector('.accordion-header');
+            
+            header.addEventListener('click', () => {
+                const activeItem = document.querySelector('.accordion-item.active');
+                
+                if (activeItem && activeItem !== item) {
+                    activeItem.classList.remove('active');
+                }
+                
+                item.classList.toggle('active');
+            });
+        });
+        
+        // Countdown timer - Ustawiony na 10 dni od 10 kwietnia
+        function updateCountdown() {
+            const endDate = new Date("April 20, 2025 00:00:00").getTime();
+            const now = new Date().getTime();
+            
+            const diff = endDate - now;
+            
+            if (diff > 0) {
+                const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+                
+                document.getElementById('days').textContent = days;
+                document.getElementById('hours').textContent = hours;
+                document.getElementById('minutes').textContent = minutes;
+                document.getElementById('seconds').textContent = seconds;
+            } else {
+                document.getElementById('days').textContent = "0";
+                document.getElementById('hours').textContent = "0";
+                document.getElementById('minutes').textContent = "0";
+                document.getElementById('seconds').textContent = "0";
+            }
+        }
+        
+        // Initial countdown update
+        updateCountdown();
+        
+        // Update countdown every second
+        setInterval(updateCountdown, 1000);
+        
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 100,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
