@@ -392,9 +392,93 @@
             transform: rotate(-45deg);
         }
         
+        /* Top Timer Styles */
+        .top-timer-container {
+            background-color: #FFFFFF;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            padding: 1rem 0;
+            position: relative;
+            z-index: 90;
+            margin-top: var(--header-height);
+        }
+        
+        .top-timer-header {
+            text-align: center;
+            margin-bottom: 0.75rem;
+        }
+        
+        .top-timer-header p {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--secondary);
+            margin-bottom: 0;
+            background: var(--gradient-secondary);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            display: inline-block;
+            padding: 0.25rem 1rem;
+            border-radius: var(--radius-full);
+            border: 1px dashed var(--secondary);
+        }
+        
+        .top-timer {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .top-timer-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 0 0.75rem;
+        }
+        
+        .top-timer-value {
+            font-family: 'Space Grotesk', monospace;
+            font-size: 2.25rem;
+            font-weight: 700;
+            line-height: 1;
+            color: var(--secondary);
+            padding: 0.5rem;
+            min-width: 3.5rem;
+            text-align: center;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0.4) 100%);
+            backdrop-filter: blur(10px);
+            border-radius: var(--radius-md);
+            box-shadow: 0 4px 15px rgba(76, 78, 255, 0.15);
+            border: 1px solid rgba(76, 78, 255, 0.1);
+            transition: all var(--transition-normal);
+            margin-bottom: 0.5rem;
+        }
+        
+        .top-timer-value:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(76, 78, 255, 0.25);
+        }
+        
+        .top-timer-label {
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: var(--dark-300);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        
+        .top-timer-separator {
+            font-family: 'Space Grotesk', monospace;
+            font-weight: 700;
+            font-size: 2rem;
+            color: var(--secondary);
+            align-self: flex-start;
+            margin-top: 0.5rem;
+        }
+
+        
         /* Hero Section */
         .hero {
-            padding: calc(var(--header-height) + 5rem) 0 6rem;
+            padding: 5rem 0 6rem;
             position: relative;
             overflow: hidden;
         }
@@ -1620,6 +1704,36 @@
         </div>
     </header>
 
+    <!-- Top Timer Section -->
+    <div class="top-timer-container">
+        <div class="container">
+            <div class="top-timer-header">
+                <p>Odliczanie do końca przedsprzedaży ze zniżką 50%</p>
+            </div>
+            <div class="top-timer">
+                <div class="top-timer-item">
+                    <div class="top-timer-value" id="top-days">10</div>
+                    <div class="top-timer-label">Dni</div>
+                </div>
+                <div class="top-timer-separator">:</div>
+                <div class="top-timer-item">
+                    <div class="top-timer-value" id="top-hours">12</div>
+                    <div class="top-timer-label">Godzin</div>
+                </div>
+                <div class="top-timer-separator">:</div>
+                <div class="top-timer-item">
+                    <div class="top-timer-value" id="top-minutes">45</div>
+                    <div class="top-timer-label">Minut</div>
+                </div>
+                <div class="top-timer-separator">:</div>
+                <div class="top-timer-item">
+                    <div class="top-timer-value" id="top-seconds">33</div>
+                    <div class="top-timer-label">Sekund</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Hero Section -->
     <section class="hero">
         <div class="container">
@@ -2293,15 +2407,27 @@
                 const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
                 const seconds = Math.floor((diff % (1000 * 60)) / 1000);
                 
+                // Aktualizacja głównego licznika
                 document.getElementById('days').textContent = days;
-                document.getElementById('hours').textContent = hours;
-                document.getElementById('minutes').textContent = minutes;
-                document.getElementById('seconds').textContent = seconds;
+                document.getElementById('hours').textContent = hours < 10 ? '0' + hours : hours;
+                document.getElementById('minutes').textContent = minutes < 10 ? '0' + minutes : minutes;
+                document.getElementById('seconds').textContent = seconds < 10 ? '0' + seconds : seconds;
+                
+                // Aktualizacja górnego licznika
+                document.getElementById('top-days').textContent = days;
+                document.getElementById('top-hours').textContent = hours < 10 ? '0' + hours : hours;
+                document.getElementById('top-minutes').textContent = minutes < 10 ? '0' + minutes : minutes;
+                document.getElementById('top-seconds').textContent = seconds < 10 ? '0' + seconds : seconds;
             } else {
                 document.getElementById('days').textContent = "0";
-                document.getElementById('hours').textContent = "0";
-                document.getElementById('minutes').textContent = "0";
-                document.getElementById('seconds').textContent = "0";
+                document.getElementById('hours').textContent = "00";
+                document.getElementById('minutes').textContent = "00";
+                document.getElementById('seconds').textContent = "00";
+                
+                document.getElementById('top-days').textContent = "0";
+                document.getElementById('top-hours').textContent = "00";
+                document.getElementById('top-minutes').textContent = "00";
+                document.getElementById('top-seconds').textContent = "00";
             }
         }
         
