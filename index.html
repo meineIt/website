@@ -225,13 +225,13 @@
         
         .btn-outline {
             background: transparent;
-            border: 2px solid var(--primary);
-            color: var(--primary);
-        }
-        
-        .btn-outline:hover {
-            background: var(--primary);
+            border: 2px solid white;
             color: white;
+        }
+
+        .btn-outline:hover {
+            background: white;
+            color: black;
             transform: translateY(-2px);
         }
         
@@ -1308,6 +1308,40 @@
             opacity: 0;
         }
         
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                box-shadow: 0 5px 15px rgba(138, 43, 226, 0.4);
+            }
+            50% {
+                transform: scale(1.05);
+                box-shadow: 0 8px 25px rgba(138, 43, 226, 0.6);
+            }
+            100% {
+                transform: scale(1);
+                box-shadow: 0 5px 15px rgba(138, 43, 226, 0.4);
+            }
+        }
+
+        .btn-consultation {
+            background: var(--secondary-dark);
+            color: white;
+            box-shadow: 0 5px 15px rgba(138, 43, 226, 0.4);
+            animation: pulse 2s infinite ease-in-out;
+        }
+
+        .btn-consultation:hover {
+            background: var(--secondary);
+            box-shadow: var(--secondary);
+            transform: translateY(-2px);
+            color: white;
+        }
+
+        /* Zatrzymaj animację gdy użytkownik najedzie kursorem, aby nie było zbyt irytujące */
+        .btn-consultation:hover {
+            animation-play-state: paused;
+        }
+
         /* Responsive Styles */
         @media (max-width: 1200px) {
             .footer-grid {
@@ -1515,15 +1549,15 @@
                 <p>Przestań tracić czas na powtarzalne zadania. Dzięki naszym rozwiązaniom automatyzacyjnym zaoszczędzisz czas, zwiększysz efektywność i skupisz się na rozwoju swojej firmy.</p>
                 <p>Dołącz do grona <span class="highlight">300+ małych firm</span>, które dzięki naszym rozwiązaniom oszczędzają średnio <span class="highlight">15 godzin tygodniowo</span>.</p>
                 <div class="hero-buttons">
-                    <a href="#contact" class="btn btn-primary">Umów bezpłatną konsultację</a>
-                    <button id="ebookPopupBtn" class="btn btn-outline">Pobierz darmowy e-book</button>
+                    <a href="#contact" class="btn btn-consultation">Umów bezpłatną konsultację</a>
+                    <!-- <button id="ebookPopupBtn" class="btn btn-outline">Pobierz darmowy e-book</button> -->
                 </div>
             </div>
             <div class="hero-image fade-in-delay-1">
                 <div class="hero-video-container">
                     
                     <iframe 
-                        src="https://www.youtube.com/embed/x8a8-0COxuc?autoplay=1&mute=0&cc_load_policy=1&rel=0&modestbranding=1" 
+                        src="https://www.youtube.com/embed/x8a8-0COxuc?autoplay=0&mute=0&cc_load_policy=1&rel=0&modestbranding=1&controls=1&disablekb=1&fs=0&color=white&iv_load_policy=3&showinfo=0&autohide=1" 
                         frameborder="0" 
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
                         allowfullscreen>
@@ -1687,8 +1721,8 @@
             <h2 class="fade-in">Gotowy uwolnić potencjał swojej firmy?</h2>
             <p class="fade-in-delay-1">Skontaktuj się z nami i dowiedz się, jak automatyzacja może odmienić Twój biznes.</p>
             <div class="cta-buttons fade-in-delay-2">
-                <a href="#contact" class="btn btn-light">Umów darmową konsultację</a>
-                <button id="ctaEbookBtn" class="btn btn-secondary">Pobierz darmowy e-book</button>
+                <a href="#contact" class="btn btn-consultation">Umów darmową konsultację</a>
+                <button id="ctaEbookBtn" class="btn btn-outline">Pobierz darmowy e-book</button>
             </div>
         </div>
     </section>
