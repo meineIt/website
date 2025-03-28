@@ -429,30 +429,33 @@
         .hero-image {
 			position: relative;
 			width: 100%;
-			aspect-ratio: auto;
+			aspect-ratio: 1/1;
 			border-radius: var(--radius-lg);
 			overflow: hidden;
 			box-shadow: var(--shadow-lg);
 			background: transparent;
         }
-        
-        .hero-video-container {
-            position: absolute;
-            top: 0;
-            left: 0;
+
+        .hero-graphic {
             width: 100%;
             height: 100%;
+            object-fit: cover;
+            border-radius: var(--radius-lg);
+            transition: transform var(--transition-normal);
         }
-        
-        .hero-video-container iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
-            position: absolute;
-            top: 0;
-            left: 0;
+
+        .hero-graphic:hover {
+            transform: scale(1.02);
         }
-        
+
+        @media (max-width: 992px) {
+            .hero-image {
+                order: -1;
+                max-width: 500px;
+                margin: 0 auto;
+            }
+        }
+                
         .hero-badge {
             display: inline-flex;
             align-items: center;
@@ -1540,7 +1543,6 @@
         </div>
     </header>
 
-    <!-- Hero Section -->
     <section class="hero">
         <div class="container hero-content">
             <div class="hero-text fade-in">
@@ -1554,12 +1556,7 @@
                 </div>
             </div>
             <div class="hero-image fade-in-delay-1">
-                <div class="hero-video-container">
-		    <img 
-		        src="images/portrait.png" 
-		        alt="Automatyzacja procesów biznesowych" 
-		        style="width: 100%; height: 100%; object-fit: cover; border-radius: var(--radius-lg);">
-		</div>
+                <img src="images/portrait.png" alt="Automatyzacja procesów biznesowych" class="hero-graphic">
             </div>
         </div>
     </section>
