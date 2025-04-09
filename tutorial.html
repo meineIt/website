@@ -1146,71 +1146,74 @@
         </div>
     </footer>
 
-    <script>
-        // Mobile Menu Toggle
-        const hamburger = document.getElementById('hamburger');
-        const navMenu = document.getElementById('navMenu');
+<!-- Zmodyfikowany fragment kodu JavaScript - dodać na końcu pliku przed </body> -->
+<script>
+    // Mobile Menu Toggle
+    const hamburger = document.getElementById('hamburger');
+    const navMenu = document.getElementById('navMenu');
+    
+    if (hamburger && navMenu) {
+        hamburger.addEventListener('click', function() {
+            hamburger.classList.toggle('active');
+            navMenu.classList.toggle('active');
+            document.body.classList.toggle('no-scroll');
+        });
+    }
+    
+    // Header scroll effect
+    const header = document.getElementById('header');
+    window.addEventListener('scroll', function() {
+        if (window.scrollY > 50) {
+            header.classList.add('scrolled');
+        } else {
+            header.classList.remove('scrolled');
+        }
+    });
+    
+    // Close mobile menu after click
+    document.querySelectorAll('.nav-link').forEach(link => {
+        link.addEventListener('click', function() {
+            if (hamburger && hamburger.classList.contains('active')) {
+                hamburger.classList.remove('active');
+                navMenu.classList.remove('active');
+                document.body.classList.remove('no-scroll');
+            }
+        });
+    });
+    
+    // Custom Video Player
+    document.addEventListener('DOMContentLoaded', function() {
+        const customPlayer = document.getElementById('customVideoPlayer');
+        const youtubeContainer = document.getElementById('youtubeContainer');
         
-        if (hamburger && navMenu) {
-            hamburger.addEventListener('click', function() {
-                hamburger.classList.toggle('active');
-                navMenu.classList.toggle('active');
-                document.body.classList.toggle('no-scroll');
+        if (customPlayer) {
+            const videoId = customPlayer.getAttribute('data-video-id');
+            
+            // Ustaw tło jako miniaturkę z YouTube
+            customPlayer.style.backgroundImage = `url(https://img.youtube.com/vi/${videoId}/maxresdefault.jpg)`;
+            customPlayer.style.backgroundSize = 'cover';
+            customPlayer.style.backgroundPosition = 'center';
+            
+            // Obsługa kliknięcia w przycisk play
+            customPlayer.addEventListener('click', function() {
+                // Stwórz iframe z YouTube
+                const iframe = document.createElement('iframe');
+                iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
+                iframe.title = "Automatyzacja dla małych firm";
+                iframe.frameBorder = "0";
+                iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
+                iframe.allowFullscreen = true;
+                
+                // Wyczyść kontener YouTube i dodaj iframe
+                youtubeContainer.innerHTML = '';
+                youtubeContainer.appendChild(iframe);
+                
+                // Ukryj customowy player, pokaż YouTube
+                customPlayer.style.display = 'none';
+                youtubeContainer.style.display = 'block';
             });
         }
-        
-        // Header scroll effect
-        const header = document.getElementById('header');
-        window.addEventListener('scroll', function() {
-            if (window.scrollY > 50) {
-                header.classList.add('scrolled');
-            } else {
-                header.classList.remove('scrolled');
-            }
-        });
-        
-        // Close mobile menu after click
-        document.querySelectorAll('.nav-link').forEach(link => {
-            link.addEventListener('click', function() {
-                if (hamburger && hamburger.classList.contains('active')) {
-                    hamburger.classList.remove('active');
-                    navMenu.classList.remove('active');
-                    document.body.classList.remove('no-scroll');
-                }
-            });
-        });
-        
-        // Custom Video Player
-        document.addEventListener('DOMContentLoaded', function() {
-            const customPlayer = document.getElementById('customVideoPlayer');
-            const youtubeContainer = document.getElementById('youtubeContainer');
-            
-            if (customPlayer) {
-                // Ustaw tło - można użyć własnego obrazu lub placeholder
-                customPlayer.style.backgroundImage = "linear-gradient(135deg, var(--dark-200) 0%, var(--dark-300) 100%)";
-                
-                // Obsługa kliknięcia w przycisk play
-                customPlayer.addEventListener('click', function() {
-                    const videoId = customPlayer.getAttribute('data-video-id');
-                    
-                    // Stwórz iframe z YouTube
-                    const iframe = document.createElement('iframe');
-                    iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
-                    iframe.title = "Automatyzacja dla małych firm";
-                    iframe.frameBorder = "0";
-                    iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
-                    iframe.allowFullscreen = true;
-                    
-                    // Wyczyść kontener YouTube i dodaj iframe
-                    youtubeContainer.innerHTML = '';
-                    youtubeContainer.appendChild(iframe);
-                    
-                    // Ukryj customowy player, pokaż YouTube
-                    customPlayer.style.display = 'none';
-                    youtubeContainer.style.display = 'block';
-                });
-            }
-        });
-    </script>
+    });
+</script>
 </body>
 </html>
