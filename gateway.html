@@ -1,0 +1,901 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>hyper automate - Dostęp do tutorialu</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJjdXJyZW50Q29sb3IiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj48cGF0aCBkPSJNMTIgMkM2LjUgMiAyIDYuNSAyIDEyUzYuNSAyMiAxMiAyMiAyMiAxNy41IDIyIDEyIDE3LjUgMiAxMiAyWiIgZmlsbD0iIzRDNEVGRiI+PC9wYXRoPjxwYXRoIGQ9Ik0xMCA4TDE2IDE0IiBzdHJva2U9IiNmZmYiPjwvcGF0aD48cGF0aCBkPSJNMTYgOEwxMCAxNCIgc3Ryb2tlPSIjZmZmIj48L3BhdGg+PC9zdmc+" sizes="any">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Clash+Display:wght@400;500;600;700&family=Outfit:wght@300;400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Custom Properties */
+        :root {
+            /* Core Colors - 2025 Trend Palette - Turquoise Theme */
+            --primary: #00C2B8;
+            --primary-dark: #00A39A;
+            --secondary: #4C4EFF;
+            --secondary-dark: #3B3FD1;
+            --accent: #01F0C8;
+            --accent-dark: #04D6B3;
+            
+            /* Neutrals */
+            --light: #F4FFFE;
+            --light-200: #E6F8F6;
+            --light-300: #D6EFED;
+            --dark: #112B29;
+            --dark-200: #1D413F;
+            --dark-300: #2A504D;
+            
+            /* Utility */
+            --success: #00CC99;
+            --info: #53A9FF;
+            --warning: #FFB74A;
+            --error: #FF5252;
+            
+            /* Glass Effects */
+            --glass-bg: rgba(255, 255, 255, 0.06);
+            --glass-bg-dark: rgba(18, 19, 23, 0.65);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --glass-border-dark: rgba(255, 255, 255, 0.05);
+            
+            /* Shadows */
+            --shadow-sm: 0 2px 10px rgba(0, 194, 184, 0.05);
+            --shadow-md: 0 8px 30px rgba(0, 194, 184, 0.08);
+            --shadow-lg: 0 25px 60px rgba(0, 194, 184, 0.1);
+            --shadow-focus: 0 0 0 3px rgba(1, 240, 200, 0.25);
+            
+            /* Gradients */
+            --gradient-primary: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+            --gradient-secondary: linear-gradient(135deg, var(--secondary) 0%, #6C70FF 100%);
+            --gradient-accent: linear-gradient(135deg, var(--accent) 0%, #4DFFE1 100%);
+            --gradient-mixed: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            
+            /* Transitions */
+            --transition-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-normal: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-slow: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            
+            /* Sizing & Spacing */
+            --header-height: 80px;
+            --container-width: 1280px;
+            --radius-sm: 6px;
+            --radius-md: 12px;
+            --radius-lg: 24px;
+            --radius-full: 9999px;
+            
+            /* Z-Index Layers */
+            --z-header: 100;
+            --z-modal: 200;
+            --z-tooltip: 300;
+        }
+        
+        /* Base Reset */
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body, html {
+            width: 100%;
+            min-height: 100vh;
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: 'Outfit', system-ui, sans-serif;
+            color: var(--dark);
+            background-color: var(--light);
+            background-image: 
+                radial-gradient(circle at 90% 10%, rgba(0, 194, 184, 0.08) 0%, transparent 40%),
+                radial-gradient(circle at 10% 90%, rgba(1, 240, 200, 0.1) 0%, transparent 50%);
+            line-height: 1.6;
+            overflow-x: hidden;
+            font-size: 16px;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Clash Display', sans-serif;
+            font-weight: 700;
+            line-height: 1.2;
+            letter-spacing: -0.02em;
+        }
+        
+        h1 {
+            font-size: clamp(2.5rem, 5vw, 4.5rem);
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            background: var(--gradient-mixed);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: -0.03em;
+        }
+        
+        h2 {
+            font-size: clamp(2rem, 4vw, 3rem);
+            color: var(--dark);
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+        
+        h3 {
+            font-size: clamp(1.5rem, 3vw, 2rem);
+            color: var(--dark);
+            margin-bottom: 1rem;
+        }
+        
+        p {
+            margin-bottom: 1.5rem;
+            font-size: clamp(1rem, 1.1vw, 1.125rem);
+            color: var(--dark-300);
+        }
+        
+        a {
+            color: var(--primary);
+            text-decoration: none;
+            transition: color var(--transition-fast);
+        }
+        
+        a:hover {
+            color: var(--primary-dark);
+        }
+        
+        img, svg {
+            max-width: 100%;
+            height: auto;
+        }
+        
+        /* Container */
+        .container {
+            width: 90%;
+            max-width: var(--container-width);
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+        
+        /* Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.875rem 1.75rem;
+            font-weight: 600;
+            font-size: 1rem;
+            border-radius: var(--radius-full);
+            cursor: pointer;
+            transition: all var(--transition-normal);
+            border: none;
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+            gap: 0.5rem;
+        }
+        
+        .btn::after {
+            content: "";
+            position: absolute;
+            width: 0;
+            height: 0;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            transition: width 0.6s ease-out, height 0.6s ease-out;
+        }
+        
+        .btn:hover::after {
+            width: 300%;
+            height: 300%;
+        }
+        
+        .btn-primary {
+            background: var(--gradient-primary);
+            color: white;
+            box-shadow: 0 5px 15px rgba(76, 78, 255, 0.25);
+        }
+        
+        .btn-primary:hover {
+            box-shadow: 0 8px 25px rgba(76, 78, 255, 0.4);
+            transform: translateY(-2px);
+            color: white;
+        }
+        
+        .btn-secondary {
+            background: var(--gradient-secondary);
+            color: white;
+            box-shadow: 0 5px 15px rgba(76, 78, 255, 0.25);
+        }
+        
+        .btn-secondary:hover {
+            box-shadow: 0 8px 25px rgba(76, 78, 255, 0.4);
+            transform: translateY(-2px);
+            color: white;
+        }
+        
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: var(--z-header);
+            padding: 1rem 0;
+            transition: all var(--transition-normal);
+            background: rgba(244, 247, 255, 0.8);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(214, 221, 250, 0.5);
+        }
+        
+        header.scrolled {
+            padding: 0.75rem 0;
+            background: rgba(244, 247, 255, 0.95);
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-family: 'Clash Display', sans-serif;
+            font-size: 1.75rem;
+            font-weight: 600;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .logo span {
+            color: var(--dark);
+        }
+        
+        .nav-menu {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+        
+        .nav-link {
+            color: var(--dark-300);
+            font-weight: 500;
+            position: relative;
+            padding: 0.5rem 0;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gradient-primary);
+            transition: width var(--transition-normal);
+            border-radius: var(--radius-full);
+        }
+        
+        .nav-link:hover {
+            color: var(--primary);
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: white;
+            justify-content: center;
+            align-items: center;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--light-300);
+            z-index: 110;
+        }
+        
+        .hamburger-line {
+            width: 20px;
+            height: 2px;
+            background: var(--dark);
+            position: relative;
+            transition: all var(--transition-fast);
+        }
+        
+        .hamburger-line::before,
+        .hamburger-line::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 2px;
+            background: var(--dark);
+            transition: all var(--transition-fast);
+        }
+        
+        .hamburger-line::before {
+            transform: translateY(-6px);
+        }
+        
+        .hamburger-line::after {
+            transform: translateY(6px);
+        }
+        
+        .hamburger.active .hamburger-line {
+            background: transparent;
+        }
+        
+        .hamburger.active .hamburger-line::before {
+            transform: rotate(45deg);
+        }
+        
+        .hamburger.active .hamburger-line::after {
+            transform: rotate(-45deg);
+        }
+        
+        /* Gateway Content */
+        .gateway-content {
+            padding: calc(var(--header-height) + 5rem) 0 6rem;
+            min-height: 80vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        /* Gateway Form */
+        .gateway-form {
+            background: white;
+            border-radius: var(--radius-md);
+            padding: 3rem;
+            width: 100%;
+            max-width: 500px;
+            box-shadow: var(--shadow-lg);
+            border: 1px solid var(--light-200);
+            margin: 2rem auto;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--dark);
+            text-align: left;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 0.875rem 1.25rem;
+            border: 1px solid var(--light-300);
+            border-radius: var(--radius-md);
+            font-family: inherit;
+            font-size: 1rem;
+            transition: all var(--transition-normal);
+            background: var(--light);
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: var(--shadow-focus);
+        }
+        
+        /* Form validation styles */
+        .form-group.error .form-control {
+            border-color: var(--error);
+        }
+        
+        .form-group.error .error-message {
+            display: block;
+        }
+        
+        .error-message {
+            display: none;
+            color: var(--error);
+            font-size: 0.85rem;
+            margin-top: 0.3rem;
+            text-align: left;
+        }
+        
+        /* Success message */
+        .success-message {
+            display: none;
+            background: var(--success);
+            color: white;
+            padding: 1rem;
+            border-radius: var(--radius-md);
+            margin-bottom: 1rem;
+            font-weight: 500;
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 6rem 0 2rem;
+            border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+            position: relative;
+            margin-top: 4rem;
+        }
+        
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 4rem;
+        }
+        
+        .footer-brand p {
+            color: rgba(255, 255, 255, 0.7);
+            margin-top: 1.5rem;
+        }
+        
+        .footer-heading {
+            color: white;
+            margin-bottom: 1.5rem;
+            font-size: 1.2rem;
+            position: relative;
+            padding-bottom: 0.75rem;
+        }
+        
+        .footer-heading::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 3px;
+            background: var(--primary);
+            border-radius: var(--radius-full);
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 1rem;
+        }
+        
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.7);
+            transition: all var(--transition-fast);
+            display: inline-block;
+        }
+        
+        .footer-links a:hover {
+            color: white;
+            transform: translateX(5px);
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+        
+        .social-link {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            transition: all var(--transition-normal);
+            font-size: 1.2rem;
+        }
+        
+        .social-link:hover {
+            background: var(--primary);
+            transform: translateY(-5px);
+            color: white;
+        }
+        
+        .footer-bottom {
+            margin-top: 4rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.9rem;
+        }
+        
+        /* Toast notification */
+        .toast {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: white;
+            color: var(--dark);
+            padding: 1rem 1.5rem;
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-lg);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            transition: all 0.3s ease;
+            transform: translateY(150%);
+            opacity: 0;
+        }
+        
+        .toast.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        
+        .toast.success {
+            border-left: 4px solid var(--success);
+        }
+        
+        .toast.error {
+            border-left: 4px solid var(--error);
+        }
+        
+        .toast-icon {
+            font-size: 1.2rem;
+            margin-right: 0.75rem;
+        }
+        
+        .toast-message {
+            font-weight: 500;
+        }
+        
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.8s ease forwards;
+        }
+        
+        .fade-in-delay-1 {
+            animation: fadeIn 0.8s ease 0.2s forwards;
+            opacity: 0;
+        }
+        
+        .fade-in-delay-2 {
+            animation: fadeIn 0.8s ease 0.4s forwards;
+            opacity: 0;
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 3rem 5rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            :root {
+                --header-height: 60px;
+            }
+            
+            header {
+                padding: 0.75rem 0;
+            }
+            
+            .hamburger {
+                display: flex;
+            }
+            
+            .nav-menu {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 75%;
+                height: 100vh;
+                flex-direction: column;
+                justify-content: center;
+                gap: 2rem;
+                background: white;
+                box-shadow: var(--shadow-lg);
+                transition: right var(--transition-normal);
+                z-index: 100;
+            }
+            
+            .nav-menu.active {
+                right: 0;
+            }
+            
+            .nav-link {
+                font-size: 1.2rem;
+                width: 100%;
+                text-align: center;
+                padding: 1rem;
+            }
+            
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+            
+            .social-links {
+                justify-content: center;
+            }
+            
+            .footer-heading {
+                text-align: center;
+            }
+            
+            .footer-heading::after {
+                left: 50%;
+                transform: translateX(-50%);
+            }
+            
+            .footer-links {
+                text-align: center;
+            }
+            
+            .footer-links a:hover {
+                transform: none;
+            }
+            
+            .footer-brand {
+                text-align: center;
+            }
+            
+            .logo {
+                justify-content: center;
+            }
+            
+            .gateway-form {
+                padding: 2rem;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Toast notification -->
+    <div class="toast" id="toast">
+        <span class="toast-icon" id="toastIcon"></span>
+        <span class="toast-message" id="toastMessage"></span>
+    </div>
+
+    <!-- Floating Shapes Background -->
+    <div class="floating-shapes">
+        <div class="shape shape-1"></div>
+        <div class="shape shape-2"></div>
+        <div class="shape shape-3"></div>
+    </div>
+
+    <!-- Header -->
+    <header id="header">
+        <div class="container header-container">
+            <a href="/" class="logo">hyper<span>automate</span></a>
+            <nav>
+                <ul class="nav-menu" id="navMenu">
+                    <li><a href="/#features" class="nav-link">Korzyści</a></li>
+                    <li><a href="/#process" class="nav-link">Proces</a></li>
+                    <li><a href="/#testimonials" class="nav-link">Opinie</a></li>
+                    <li><a href="/#contact" class="nav-link">Kontakt</a></li>
+                </ul>
+                <div class="hamburger" id="hamburger">
+                    <span class="hamburger-line"></span>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Gateway Content -->
+    <section class="gateway-content">
+        <div class="container">
+            <h1 class="fade-in">Ekskluzywny dostęp do tutorialu</h1>
+            <p class="fade-in-delay-1">Podaj swój adres email, aby uzyskać dostęp do wartościowych materiałów. Odkryj, jak automatyzacja może zmienić Twój biznes!</p>
+            
+            <div class="gateway-form fade-in-delay-2">
+                <div class="success-message" id="formSuccessMessage">
+                    Dziękujemy! Za chwilę nastąpi przekierowanie do tutorialu.
+                </div>
+                
+                <form id="gatewayForm">
+                    <div class="form-group" id="emailGroup">
+                        <label for="email" class="form-label">Twój adres email *</label>
+                        <input type="email" id="email" name="email" class="form-control" required placeholder="Wprowadź swój adres email">
+                        <span class="error-message" id="emailError">Proszę podać prawidłowy adres email.</span>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">Uzyskaj dostęp do tutorialu</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="#" class="logo" style="color: white;">hyper<span style="color: var(--accent);">automate</span></a>
+                    <p>Pomagamy małym firmom automatyzować procesy biznesowe, oszczędzać czas i zwiększać efektywność działania.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link">f</a>
+                        <a href="#" class="social-link">in</a>
+                        <a href="#" class="social-link">ig</a>
+                        <a href="#" class="social-link">yt</a>
+                    </div>
+                </div>
+                <div class="footer-nav">
+                    <h3 class="footer-heading">Nawigacja</h3>
+                    <ul class="footer-links">
+                        <li><a href="/">Strona główna</a></li>
+                        <li><a href="/#features">Korzyści</a></li>
+                        <li><a href="/#process">Proces</a></li>
+                        <li><a href="/#testimonials">Opinie</a></li>
+                        <li><a href="/#contact">Kontakt</a></li>
+                    </ul>
+                </div>
+                <div class="footer-services">
+                    <h3 class="footer-heading">Usługi</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Automatyzacja procesów</a></li>
+                        <li><a href="#">Integracja systemów</a></li>
+                        <li><a href="#">Boty i asystenci AI</a></li>
+                        <li><a href="#">Automatyzacja marketingu</a></li>
+                        <li><a href="#">Automatyczne raportowanie</a></li>
+                    </ul>
+                </div>
+                <div class="footer-legal">
+                    <h3 class="footer-heading">Informacje prawne</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Polityka prywatności</a></li>
+                        <li><a href="#">Warunki korzystania</a></li>
+                        <li><a href="#">Cookies</a></li>
+                        <li><a href="#">RODO</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 hyper automate. Wszelkie prawa zastrzeżone.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Document ready function
+        document.addEventListener('DOMContentLoaded', function() {
+            // Toast notification function
+            function showToast(message, type = 'success') {
+                const toast = document.getElementById('toast');
+                const toastMessage = document.getElementById('toastMessage');
+                const toastIcon = document.getElementById('toastIcon');
+                
+                toastMessage.textContent = message;
+                toast.className = 'toast show ' + type;
+                
+                if (type === 'success') {
+                    toastIcon.textContent = '✓';
+                } else {
+                    toastIcon.textContent = '!';
+                }
+                
+                setTimeout(() => {
+                    toast.className = 'toast';
+                }, 5000);
+            }
+            
+            // Form validation functions
+            function validateEmail(email) {
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                return emailRegex.test(email);
+            }
+            
+            // Mobile Menu Toggle
+            const hamburger = document.getElementById('hamburger');
+            const navMenu = document.getElementById('navMenu');
+            
+            if (hamburger && navMenu) {
+                hamburger.addEventListener('click', function() {
+                    hamburger.classList.toggle('active');
+                    navMenu.classList.toggle('active');
+                    document.body.classList.toggle('no-scroll');
+                });
+            }
+            
+            // Header scroll effect
+            const header = document.getElementById('header');
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 50) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+            });
+            
+            // Gateway Form Submission
+            const gatewayForm = document.getElementById('gatewayForm');
+            
+            if (gatewayForm) {
+                gatewayForm.addEventListener('submit', async function(e) {
+                    e.preventDefault();
+                    
+                    // Reset form errors
+                    document.getElementById('emailGroup').classList.remove('error');
+                    
+                    // Get email value
+                    const email = document.getElementById('email').value.trim();
+                    
+                    // Validate email
+                    if (!email || !validateEmail(email)) {
+                        document.getElementById('emailGroup').classList.add('error');
+                        return;
+                    }
+                    
+                    try {
+                        // Show processing message
+                        document.getElementById('formSuccessMessage').style.display = 'block';
+                        document.getElementById('formSuccessMessage').textContent = "Przetwarzanie...";
+                        
+                        // Wywołaj Netlify Function zamiast bezpośredniego API MailerLite
+                        // Używamy tego samego podejścia co w formularzu ebooka
+                        const response = await fetch('/api/subscribe-tutorial', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify({ email: email })
+                        });
+                        
+                        const result = await response.json();
+                        
+                        if (result.success) {
+                            // Pokaż komunikat o sukcesie
+                            document.getElementById('formSuccessMessage').textContent = "Dziękujemy! Za chwilę nastąpi przekierowanie do tutorialu.";
+                            gatewayForm.reset();
+                            
+                            showToast('Dziękujemy za zapisanie się!');
+                            
+                            // Przekieruj po krótkim opóźnieniu
+                            setTimeout(() => {
+                                window.location.href = 'https://hyperautomate.pl/tutorial';
+                            }, 2000);
+                        } else {
+                            throw new Error(result.message || 'Wystąpił błąd');
+                        }
+                        
+                    } catch (error) {
+                        document.getElementById('formSuccessMessage').style.display = 'none';
+                        showToast('Wystąpił błąd. Spróbuj ponownie później.', 'error');
+                        console.error('Error:', error);
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>
